@@ -1,0 +1,6 @@
+asgiref==3.8.1
+Django==5.1.7
+mysqlclient==2.2.7
+PyMySQL==1.1.1
+PyYAML==6.0.2
+sqlparse==0.5.3
