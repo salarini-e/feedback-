@@ -155,7 +155,7 @@ STATIC_URL = 'static/'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-
+LOGIN_URL = '/admin/login/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'settings/media')
 
