@@ -20,3 +20,35 @@ class Feedback(models.Model):
     
     def __str__(self):
         return f"Feedback {self.id} - {self.local.nome}"
+
+    def get_ambiente_icon(self):
+        return self._get_icon(self.ambiente)
+
+    def get_tempo_espera_icon(self):
+        return self._get_icon(self.tempo_espera)
+
+    def get_satisfacao_icon(self):
+        return self._get_icon(self.satisfacao)
+
+    def get_atendimento_icon(self):
+        return self._get_icon(self.atendimento)
+
+    def _get_icon(self, value):
+        icons = {
+            1: {"icon": "fa-face-angry", "color": "red"},
+            2: {"icon": "fa-face-frown", "color": "orange"},
+            3: {"icon": "fa-face-meh", "color": "rgb(235, 219, 0)"},
+            4: {"icon": "fa-face-smile-beam", "color": "rgb(61, 212, 61)"},
+            5: {"icon": "fa-face-grin-wink", "color": "green"},
+        }
+        return icons.get(value, {"icon": "fa-question-circle", "color": "black"})
+
+    def has_negative_feedback(self):
+        return any(
+            rating <= 3 for rating in [
+                self.ambiente,
+                self.tempo_espera,
+                self.satisfacao,
+                self.atendimento
+            ]
+        )

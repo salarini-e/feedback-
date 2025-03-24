@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.db.models import Avg, Count
 from .forms import FeedbackForm
 from servicos.models import Local_de_atendimento
 
@@ -35,3 +36,23 @@ def feedback(request, hash):
         'form': form
     }
     return render(request, 'feedback.html', context)
+
+def painel_feedback(request, hash):
+    local = get_object_or_404(Local_de_atendimento, hash=hash)
+    feedbacks = local.feedbacks.all()
+    negative_feedbacks = feedbacks.filter(satisfacao__lt=3)
+    summary = {
+        'avg_satisfaction': feedbacks.aggregate(Avg('satisfacao'))['satisfacao__avg'],
+        'avg_ambiente': feedbacks.aggregate(Avg('ambiente'))['ambiente__avg'],
+        'avg_tempo_espera': feedbacks.aggregate(Avg('tempo_espera'))['tempo_espera__avg'],
+        'avg_atendimento': feedbacks.aggregate(Avg('atendimento'))['atendimento__avg'],
+        'total_feedbacks': feedbacks.count(),
+        'negative_feedbacks': negative_feedbacks.count(),
+    }
+    context = {
+        'local': local,
+        'feedbacks': feedbacks,
+        'negative_feedbacks': negative_feedbacks,
+        'summary': summary,
+    }
+    return render(request, 'painel_fedback.html', context)

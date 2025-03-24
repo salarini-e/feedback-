@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="m-auto w-100 d-flex flex-column">
                                         <p style="margin: 0px; font-size: 12pt;">Total de avaliações: <span>{{local.total}}</span></p>
-                                        <span style="font-size: 12pt; margin-bottom: 10px;" class="badge badge-primary badge-pill mb-3 py-2"><i class="fa-solid fa-magnifying-glass-chart mr-2"></i>Feedbacks</span>
+                                        <a href="{% url 'feedbacks:painel_feedback' local.hash %}" style="font-size: 12pt; margin-bottom: 10px;" class="badge badge-primary badge-pill mb-3 py-2"><i class="fa-solid fa-magnifying-glass-chart mr-2"></i>Feedbacks</a>
                                         <a href="{% url 'feedbacks:feedback' local.hash %}" style="font-size: 12pt; margin-bottom: 100px; background-color: #232136;" class="badge badge-primary badge-pill mb-3 py-2"><i class="fa-regular fa-rectangle-list mr-2"></i>Formulário</a>
                                         <hr>
                                         <br>
