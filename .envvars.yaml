@@ -1,0 +1,23 @@
+db_host: 'localhost'
+db_port: '3306'
+db_name: 'feedback'
+db_user: 'feedback'
+db_pw: 'minhasenha@123'
+# db_host: '192.168.1.220'
+# db_port: '3306'
+# db_name: 'intranet'
+# db_user: 'intranet'
+# db_pw: '4ds56a4ds4ad6minhasenha#@123'
+django_secret_key: sedasdcredasdtkey12asdadasdasd44da94d89a4da4d9924da4d9456
+debug_mode: True
+sqlite_mode: False
+email_sistema: 'sebsecretaria.ti@gmail.com'
+email_pw: 'fjcd niqm fhks ggec'
+hCAPTCHA_Public_Key: '62f84cbc-6c62-4340-ad04-2066a742fb44'
+hCAPTCHA_Secret_Key: 'ES_2aaf40fc5a7e40d5a5f73f2feb68c3f9'
+GOOGLE_OAUTH2_PUBLIC_KEY: token
+GOOGLE_OAUTH2_SECRET_KEY: token
+FACEBOOK_DEVELOPER_PUBLIC_KEY: token
+FACEBOOK_DEVELOPER_SECRET_KEY: token
+el_api_token: 'token'
+el_id_client: "token"
