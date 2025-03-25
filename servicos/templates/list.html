@@ -33,12 +33,12 @@
                         MENU
                     </div>
                    <div class="mr-3 menu-item my-auto d-flex">
-                    {% if request.user.is_superuser %}
+                    {% if user.is_superuser %}
                         <a href="{% url 'servicos:novo_atendimento' %}" class="m-auto">
                             <i class="fa-solid fa-square-plus mr-2"></i>Novo atendimento
                         </a>
                     {% endif %}
-                        <a {% if not request.user.is_superuser %}class="m-auto"{% else %}style="margin-left: 40px;"{% endif %}  href="{% url 'logout' %}">
+                        <a {% if not user.is_superuser %}class="m-auto"{% else %}style="margin-left: 40px;"{% endif %}  href="{% url 'logout' %}">
                            <i class="fa-solid fa-door-open mr-2"></i> Logout
                         </a>
                     </div>                    
@@ -69,9 +69,11 @@
                                     <img id="qrcode{{local.id}}" src="https://via.placeholder.com/350" alt="QR Code Casa" class="img-fluid mb-3">                                    
                                 </div>
                                 <div class="col d-flex flex-column p-5">
+                                    {% if user.is_superuser %}
                                     <div class="w--100 mb-auto d-flex">
                                         <a href="{% url 'servicos:editar_atendimento' local.hash %}" style="margin-left: auto;"><i class="fa-solid fa-pen-to-square mr-2"></i> Editar</a>
                                     </div>
+                                    {% endif %}
                                     <div class="m-auto w-100 d-flex flex-column">
                                         <p style="margin: 0px; font-size: 12pt;">Total de avaliações: <span>{{local.total}}</span></p>
                                         <a href="{% url 'feedbacks:painel_feedback' local.hash %}" style="font-size: 12pt; margin-bottom: 10px;" class="badge badge-primary badge-pill mb-3 py-2"><i class="fa-solid fa-magnifying-glass-chart mr-2"></i>Feedbacks</a>
