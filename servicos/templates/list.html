@@ -33,8 +33,13 @@
                         MENU
                     </div>
                    <div class="mr-3 menu-item my-auto d-flex">
+                    {% if request.user.is_superuser %}
                         <a href="{% url 'servicos:novo_atendimento' %}" class="m-auto">
-                            <i class="fa-solid fa-square-plus mr-1"></i>Novo atendimento
+                            <i class="fa-solid fa-square-plus mr-2"></i>Novo atendimento
+                        </a>
+                    {% endif %}
+                        <a {% if not request.user.is_superuser %}class="m-auto"{% else %}style="margin-left: 40px;"{% endif %}  href="{% url 'logout' %}">
+                           <i class="fa-solid fa-door-open mr-2"></i> Logout
                         </a>
                     </div>                    
                 </div>
@@ -70,7 +75,7 @@
                                     <div class="m-auto w-100 d-flex flex-column">
                                         <p style="margin: 0px; font-size: 12pt;">Total de avaliações: <span>{{local.total}}</span></p>
                                         <a href="{% url 'feedbacks:painel_feedback' local.hash %}" style="font-size: 12pt; margin-bottom: 10px;" class="badge badge-primary badge-pill mb-3 py-2"><i class="fa-solid fa-magnifying-glass-chart mr-2"></i>Feedbacks</a>
-                                        <a href="{% url 'feedbacks:feedback' local.hash %}" style="font-size: 12pt; margin-bottom: 100px; background-color: #232136;" class="badge badge-primary badge-pill mb-3 py-2"><i class="fa-regular fa-rectangle-list mr-2"></i>Formulário</a>
+                                        <a target="_blank" href="{% url 'feedbacks:feedback' local.hash %}" style="font-size: 12pt; margin-bottom: 100px; background-color: #232136;" class="badge badge-primary badge-pill mb-3 py-2"><i class="fa-regular fa-rectangle-list mr-2"></i>Formulário</a>
                                         <hr>
                                         <br>
                                         <label for="">Proporções (pixels)</label>

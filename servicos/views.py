@@ -14,7 +14,7 @@ def list(request):
 @login_required
 def novo_atendimento(request):
     if request.method == 'POST':
-        form = LocalDeAtendimentoForm(request.POST)
+        form = LocalDeAtendimentoForm(request.POST, request.FILES)  # Handle file uploads
         if form.is_valid():
             form.save()
             return redirect('servicos:index')  # Redireciona para a página inicial após salvar
@@ -26,7 +26,7 @@ def novo_atendimento(request):
 def editar_atendimento(request, hash):
     local = get_object_or_404(Local_de_atendimento, hash=hash)
     if request.method == 'POST':
-        form = LocalDeAtendimentoForm(request.POST, instance=local)
+        form = LocalDeAtendimentoForm(request.POST, request.FILES, instance=local)  # Handle file uploads
         if form.is_valid():
             form.save()
             return redirect('servicos:index')  # Redireciona para a página inicial após salvar

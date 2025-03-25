@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -6,7 +7,9 @@ class Local_de_atendimento(models.Model):
     nome = models.CharField(max_length=255)
     endereco = models.TextField(blank=True, null=True)
     descricao = models.TextField(blank=True, null=True)
-    hash = models.CharField(max_length=32, blank=True, null=True)    
+    hash = models.CharField(max_length=32, blank=True, null=True)
+    banner = models.ImageField(upload_to='banners/', blank=True, null=True)  # Add banner field
+    
     def __str__(self):
         return self.nome
 

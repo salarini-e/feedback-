@@ -55,8 +55,12 @@
          <div class="services_section_2">
             <div class="row">
                <div class="col">
-                  <h5 class="tasty_text {% if local.descricao %}mb-3{% endif %}" style="text-align: center;">                     
-                     <strong>BANNER AQUI</strong>
+                  <h5 class="tasty_text {% if local.descricao %}mb-3{% endif %}" style="text-align: center;">
+                     {% if local.banner %}
+                        <img src="{{ local.banner.url }}" alt="Banner do Local" style="max-width: 100%; height: auto;"> <!-- Display banner -->
+                     {% else %}
+                        <strong>{{ local.nome }}</strong> <!-- Display name if no banner -->
+                     {% endif %}
                   </h5>
                   <p style="text-align: justify;">
                      {% if local.descricao %}
@@ -466,9 +470,9 @@
             font-size: 14px;
          }
       }
-      .logoPMNF{
+      /* .logoPMNF{
          
-      }
+      } */
    </style>
 </body>
 

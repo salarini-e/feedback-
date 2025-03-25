@@ -33,7 +33,7 @@
             </div>
             <div class="row mt-5">
                 <div class="col-md-8 offset-md-2">
-                    <form method="POST" action="">
+                    <form method="POST" action="" enctype="multipart/form-data"> <!-- Add enctype for file uploads -->
                         {% csrf_token %}
                         <div class="form-group d-flex flex-column">
                             <label for="nome" class="d-block">Nome do Local</label>
@@ -46,7 +46,14 @@
                         <div class="form-group d-flex flex-column">
                             <label for="endereco" class="d-block">Endereço</label>
                             <input class="form-control d-block" id="endereco" name="endereco" placeholder="Digite o endereço (opcional)" value="{{ form.endereco.value }}"> 
-                        </div>                        
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="banner" class="d-block">Banner (opcional)</label>
+                            <input type="file" class="form-control d-block" id="banner" name="banner">
+                            {% if form.banner.value %}
+                                <p class="mt-2">Banner atual: <img src="{{ form.banner.value.url }}" alt="Banner Atual" style="max-width: 100%; height: auto;"></p>
+                            {% endif %}
+                        </div>
                         <button type="submit" class="btn btn-primary btn-block">Salvar Alterações</button>
                     </form>
                 </div>

@@ -33,7 +33,7 @@
             </div>
             <div class="row mt-5">
                 <div class="col-md-8 offset-md-2">
-                    <form method="POST" action="">
+                    <form method="POST" action="" enctype="multipart/form-data"> <!-- Add enctype for file uploads -->
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="nome" class="d-block">Nome do Local</label>
@@ -46,6 +46,10 @@
                         <div class="form-group">
                             <label for="endereco" class="d-block">Endereço</label>
                             <input class="form-control d-block" id="endereco" name="endereco" placeholder="Digite o endereço (opcional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="banner" class="d-block">Banner (opcional)</label>
+                            <input type="file" class="form-control d-block" id="banner" name="banner">
                         </div>
                         <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
                     </form>

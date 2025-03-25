@@ -155,9 +155,10 @@ STATIC_URL = 'static/'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-LOGIN_URL = '/admin/login/'
+LOGIN_URL = '/login/'  # Update to point to the custom login view
+LOGIN_REDIRECT_URL = '/'  # Optional: Redirect after successful login
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'settings/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Update media root
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -166,4 +167,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SESSION_COOKIE_SECURE = True  # Se estiver usando HTTPS
 # SESSION_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_SAMESITE = "None"  # Para permitir compartilhamento entre subdomínios
-    
