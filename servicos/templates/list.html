@@ -140,7 +140,7 @@
         }
 
         function imprimirQRCodeComTamanho(hash, id, width = 350, height = 350) {
-            const url = 'https://localhost:8000/feedback/' + hash;
+            const url = 'https://feedback.novafriburgo.rj.gov.br/feedback/' + hash;
             const finalWidth = width || 350;
             const finalHeight = height || 350;
             const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=${finalWidth}x${finalHeight}`;
