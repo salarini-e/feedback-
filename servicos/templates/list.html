@@ -117,13 +117,13 @@
     <script>
         // Função para gerar o QR Code para o respectivo local
         function gerarQRCode(hash, elemento) {
-            const url = 'https://localhost:8000/feedback/' + hash;
+            const url = 'https://feedback.novafriburgo.rj.gov.br/feedback/' + hash;
             const qrCodeImg = document.getElementById(elemento);
             qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=350x350`;
         }
 
         function gerarQRCode_with_size(hash, elemento, width, height) {
-            const url = 'https://localhost:8000/feedback/' + hash;
+            const url = 'feedback.novafriburgo.rj.gov.br/feedback/' + hash;
             const qrCodeImg = document.getElementById(elemento);
             const finalWidth = width || 350;
             const finalHeight = height || 350;
