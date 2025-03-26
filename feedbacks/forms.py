@@ -13,3 +13,4 @@ class FeedbackForm(forms.ModelForm):
             'contato_nome': forms.TextInput(attrs={'placeholder': 'Seu nome'}),
             'contato_telefoe': forms.TextInput(attrs={'placeholder': 'Seu telefone'}),
         }
+

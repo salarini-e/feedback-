@@ -92,7 +92,7 @@
                   <div class="row">
                      <div class="col" style="text-align: center;">
                         <div class="form-group d-flex flex-column" data-category="tempo">
-                           <label for="exampleFormControlSelect1">Como está O tempo de espera e a rapidez do atendimento?</label>
+                           <label for="exampleFormControlSelect1">Como está o tempo de espera e a rapidez do atendimento?</label>
                            <div class="emoji-rating mx-auto">
                               <span class="emoji" data-value="1" data-category="tempo" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
                               <span class="emoji" data-value="2" data-category="tempo" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
@@ -146,7 +146,7 @@
                   <div class="row">
                      <div class="col" style="text-align: center;">
                         <div class="form-group d-flex flex-column">
-                           <label for="exampleFormControlSelect1">Você gostaria de deixar seu nome ou teleone para que o Secretário ou Líder da {{local.nome}} pudesse entrar em contato para entender melhor suas avaliações e sugestçoes?</label>
+                           <label for="exampleFormControlSelect1">Você gostaria de deixar seu nome ou teleone para que o Secretário ou Líder da {{local.nome}} pudesse entrar em contato para entender melhor suas avaliações e sugestões?</label>
                            <div class="radio-group mx-auto mt-3">
                               <label class="radio">
                                   <input type="radio" name="resposta" value="sim">
@@ -330,6 +330,23 @@
          });
 
          enviarBtn.disabled = true;
+
+         {% if local.nome == 'SUBSECRETARIA DE TI' %}          
+            document.querySelectorAll(".form-group[data-category]").forEach((formGroup, index) => {
+               const labels = [
+                  "Como você avalia o atendimento da TI?",
+                  "Como está o tempo de espera e a rapidez do atendimento da TI?",
+                  "Qual é seu nível de satisfação com a solução do problema que o motivou a abrir o chamado na TI?",
+                  "Como você avalia o atendimento do técnico que o atendeu?",
+                  "Você gostaria de dar alguma sugestão para que a TI fosse mais eficiente no atendimento?",
+                  "Você gostaria de deixar seu nome ou teleone para que o Secretário ou Líder da Subsecretaria de TI pudesse entrar em contato para entender melhor suas avaliações e sugestões?"
+            ];
+
+               if (index < labels.length) {
+                  formGroup.querySelector("label").textContent = labels[index];
+               }
+            });
+         {% endif %}
       });
    </script>
 
