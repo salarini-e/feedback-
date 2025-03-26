@@ -55,4 +55,7 @@ def painel_feedback(request, hash):
         'negative_feedbacks': negative_feedbacks,
         'summary': summary,
     }
+
+    if local.nome == 'SUBSECRETARIA DE TI':
+        return render(request, 'painel_fedback_ti.html', context)
     return render(request, 'painel_fedback.html', context)
