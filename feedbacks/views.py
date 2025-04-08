@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.db.models import Avg, Count
 from .forms import FeedbackForm
 from servicos.models import Local_de_atendimento
+from .functions import get_feedback_distribution, get_frequencies
 
 def feedback(request, hash):
     local = get_object_or_404(Local_de_atendimento, hash=hash)
@@ -39,21 +40,52 @@ def feedback(request, hash):
 
 def painel_feedback(request, hash):
     local = get_object_or_404(Local_de_atendimento, hash=hash)
-    feedbacks = local.feedbacks.all()
+    feedbacks = local.feedbacks.all()    
     negative_feedbacks = feedbacks.filter(satisfacao__lt=3)
+    feedbacks_with_suggestions = feedbacks.exclude(sugestoes__isnull=True).exclude(sugestoes__exact="").exclude(sugestoes__iexact="n/h")  # Exclui 'n/h'
+
     summary = {
-        'avg_satisfaction': feedbacks.aggregate(Avg('satisfacao'))['satisfacao__avg'],
-        'avg_ambiente': feedbacks.aggregate(Avg('ambiente'))['ambiente__avg'],
-        'avg_tempo_espera': feedbacks.aggregate(Avg('tempo_espera'))['tempo_espera__avg'],
-        'avg_atendimento': feedbacks.aggregate(Avg('atendimento'))['atendimento__avg'],
+        'satisfacao_dist': get_feedback_distribution(feedbacks, 'satisfacao'),
+        'ambiente_dist': get_feedback_distribution(feedbacks, 'ambiente'),
+        'tempo_espera_dist': get_feedback_distribution(feedbacks, 'tempo_espera'),
+        'atendimento_dist': get_feedback_distribution(feedbacks, 'atendimento'),
         'total_feedbacks': feedbacks.count(),
-        'negative_feedbacks': negative_feedbacks.count(),
+        'negative_feedbacks': feedbacks.filter(satisfacao__lt=3).count(),
     }
+
+    # Add moda and mediana to each metric
+    contexto_estatisticas = {
+        'ambiente': get_frequencies(feedbacks, 'ambiente'),
+        'tempo_espera': get_frequencies(feedbacks, 'tempo_espera'),
+        'satisfacao': get_frequencies(feedbacks, 'satisfacao'),
+        'atendimento': get_frequencies(feedbacks, 'atendimento'),
+    }
+
+    summary_with_flags = [
+        {
+            'metric': key.replace('_dist', '').capitalize(),
+            'is_distribution': key.endswith('_dist'),
+            'data': value,
+            'moda': contexto_estatisticas[key.replace('_dist', '')]['moda'],
+            'mediana': contexto_estatisticas[key.replace('_dist', '')]['mediana']
+        }
+        for key, value in summary.items() if key.endswith('_dist')
+    ]
+
+    # Pass non-distribution keys separately
+    non_distribution_summary = {
+        'total_feedbacks': summary['total_feedbacks'],
+        'negative_feedbacks': summary['negative_feedbacks'],
+    }
+
     context = {
         'local': local,
         'feedbacks': feedbacks,
+        'feedbacks_with_suggestions': feedbacks_with_suggestions,  # Atualizado para excluir 'n/h'
         'negative_feedbacks': negative_feedbacks,
-        'summary': summary,
+        'summary': summary_with_flags,
+        'non_distribution_summary': non_distribution_summary,
+        'estatisticas': contexto_estatisticas
     }
 
     if local.nome == 'SUBSECRETARIA DE TI':
