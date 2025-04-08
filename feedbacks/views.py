@@ -45,9 +45,10 @@ def painel_feedback(request, hash):
     feedbacks_with_suggestions = feedbacks.exclude(sugestoes__isnull=True).exclude(sugestoes__exact="").exclude(sugestoes__iexact="n/h")  # Exclui 'n/h'
 
     summary = {
-        'satisfacao_dist': get_feedback_distribution(feedbacks, 'satisfacao'),
+        
         'ambiente_dist': get_feedback_distribution(feedbacks, 'ambiente'),
         'tempo_espera_dist': get_feedback_distribution(feedbacks, 'tempo_espera'),
+        'satisfacao_dist': get_feedback_distribution(feedbacks, 'satisfacao'),
         'atendimento_dist': get_feedback_distribution(feedbacks, 'atendimento'),
         'total_feedbacks': feedbacks.count(),
         'negative_feedbacks': feedbacks.filter(satisfacao__lt=3).count(),
