@@ -311,6 +311,61 @@
       .hidden {
          display: none;
       }
+      #termometro .chart-container {
+      position: relative;
+      /* width: 100%; */
+      /* max-width: 700px; */
+      height: 300px;
+      margin: auto;
+    }
+    #termometro .gradient-line {
+      position: absolute;
+      top: 50%;
+      height: 8px;
+      border-radius: 4px;
+      transform: translateY(-50%);
+    }
+    #termometro .point {
+      position: absolute;
+      top: calc(50% + 30px);
+      /* font-size: 24px; */
+      transform: translateX(-50%);
+      transition: all 0.3s ease;
+    }
+    #termometro .label {
+      position: absolute;
+      top: calc(50% + 60px);
+      font-size: 14px;
+      transform: translateX(-50%);
+      color: #333;
+    }
+    #termometro .trend-bubble {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: translateX(-50%);
+    }
+    #termometro .trend-point {
+      font-size: 24px;
+      /* border: 2px solid black; */
+      border-radius: 50%;
+      /* padding: 2px;   */
+      background: white;
+      z-index: 10;
+    }
+    #termometro .bubble-tail {
+      width: 2px;
+      height: 15px;
+      background: black;
+      margin-top: 2px;
+    }
+    .mx-auto{
+      margin: 0 auto;      
+    }
+      .d-flex{
+         display: flex;
+      }
    </style>
 </head>
 
@@ -335,8 +390,8 @@
             <p><i class="fa-solid fa-envelope" style="color: #ffc107;"></i></p>
          </button>
          <button onclick="showSection('search-section')" class="summary-card">
-            <h5>Pesquisar</h5>
-            <p><i class="fa-solid fa-search" style="color: #dc3545;"></i></p>
+            <h5>Termômetro</h5>            
+            <p><i class="fa-solid fa-temperature-half" style="color: #dc3545;"></i></p>
          </button>
       </div>
       <div id="distribution-section" class="distribution-section hidden">
@@ -495,10 +550,9 @@
          </div>
       </div>
       <div id="search-section" class="hidden">
-         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Pesquisar</h3>
-         <div style="text-align: center; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <p style="font-size: 1.2rem; color: #666;">Estamos trabalhando para construir essa ferramenta. Em breve, você poderá realizar pesquisas aqui!</p>
-            <i class="fa-solid fa-tools" style="font-size: 2rem; color: #0056b3;"></i>
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Termômetro de Satisfação</h3>
+         <div id="termometro" class="d-flex bg-info " style="padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">            
+            <div class="mx-auto chart-container" id="chart"></div>
          </div>
       </div>
    </div>
@@ -594,6 +648,89 @@
          }
       }
    </script>
+   <script>
+      const data = {
+        a: {{valores_satisfacao_geral.1}},
+        b: {{valores_satisfacao_geral.2}},
+        c: {{valores_satisfacao_geral.3}},
+        d: {{valores_satisfacao_geral.4}},
+        e: {{valores_satisfacao_geral.5}}
+      };
+  
+      const satisfactionMap = [
+        { ponto: 'a' ,max: 5, icon: '<i class="fa-solid fa-face-angry"></i>', emoji: '😡', color: '#e74c3c' },
+        { ponto: 'b' ,max: 10, icon: '<i class="fa-solid fa-face-frown"></i>', emoji: '😟', color: '#e67e22' },
+        { ponto: 'c' ,max: 20, icon: '<i class="fa-solid fa-face-meh"></i>', emoji: '😐', color: '#f1c40f' },
+        { ponto: 'd' ,max: 30, icon: '<i class="fa-solid fa-face-smile"></i>', emoji: '😊', color: '#2ecc71' },
+        { ponto: 'e' ,max: Infinity, icon: '<i class="fa-solid fa-face-laugh"></i>', emoji: '😁', color: '#27ae60' },
+      ];
+  
+      const container = document.getElementById('chart');
+  
+      const keys = Object.keys(data).sort();
+      const values = keys.map(k => data[k]);
+      const totalWeight = values.reduce((a, b) => a + b, 0);
+  
+      const pointSpacing = 120;
+      const offsetLeft = (container.offsetWidth - ((keys.length - 1) * pointSpacing)) / 2 + 20; // Add padding of 20px
+      const positions = keys.map((_, i) => offsetLeft + i * pointSpacing);
+  
+      // Linha de gradiente entre o primeiro e o último ponto
+      const gradientLine = document.createElement('div');
+      gradientLine.className = 'gradient-line';
+      const startX = positions[0] - 20; // Adjust start position for padding
+      const endX = positions[positions.length - 1] + 20; // Adjust end position for padding
+      gradientLine.style.left = `${startX}px`;
+      gradientLine.style.width = `${endX - startX}px`;
+      gradientLine.style.background = 'linear-gradient(to right, #e74c3c 0%, #e67e22 20%, #f1c40f 40%, #2ecc71 70%, #27ae60 100%)';
+      container.appendChild(gradientLine);
+  
+      keys.forEach((key, index) => {
+        const value = data[key];
+        const x = positions[index];
+        const satisfaction = satisfactionMap.find(s => s.ponto === key);
+
+        const point = document.createElement('div');
+        point.className = 'point';
+        point.style.left = `${x}px`;
+        point.style.color = satisfaction.color;
+        point.innerHTML = satisfaction.icon; // Display the respective icon
+        container.appendChild(point);
+
+      //   const label = document.createElement('div');
+      //   label.className = 'label';
+      //   label.style.left = `${x}px`;
+      //   label.innerText = `${key.toUpperCase()} (${value})`;
+      //   container.appendChild(label);
+      });
+  
+      // Cálculo do centro de massa (ponto de equilíbrio)
+      const centerOfMassIndex = values
+        .map((val, i) => i * val)
+        .reduce((a, b) => a + b, 0) / totalWeight;
+
+      const balanceX = offsetLeft + centerOfMassIndex * pointSpacing;
+
+      // Determine the satisfaction level at the center of mass
+      const balanceSatisfaction = satisfactionMap.find((s, i) => centerOfMassIndex <= i) || satisfactionMap[satisfactionMap.length - 1];
+
+      const trendBubble = document.createElement('div');
+      trendBubble.className = 'trend-bubble';
+      trendBubble.style.left = `${balanceX}px`;
+      trendBubble.style.top = `calc(50% - 65px)`;
+
+      const trendPoint = document.createElement('div');
+      trendPoint.className = 'trend-point';
+      trendPoint.style.color = balanceSatisfaction.color;
+      trendPoint.innerHTML = balanceSatisfaction.emoji; // Display the correct emoji based on the center of mass
+
+      const tail = document.createElement('div');
+      tail.className = 'bubble-tail';
+
+      trendBubble.appendChild(trendPoint);
+      trendBubble.appendChild(tail);
+      container.appendChild(trendBubble);
+    </script>
 </body>
 
 </html>

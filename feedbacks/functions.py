@@ -41,3 +41,24 @@ def get_frequencies(feedbacks, field):
         'mediana': RATING_CHOICES.get(mediana, mediana),
         'total': total
     }
+
+def get_valores_termometro(feedbacks):
+    """
+    Retorna os valores do termômetro para cada métrica.
+    No caso, pegamos a média de cada métrica de cada atributo qualitativo.
+    """
+    valores = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+    }
+    
+    for feedback in feedbacks:
+        valores[feedback.ambiente] += 1
+        valores[feedback.tempo_espera] += 1
+        valores[feedback.satisfacao] += 1
+        valores[feedback.atendimento] += 1
+    valores = {k: int(round(v / 4)) for k, v in valores.items()}
+    return valores  

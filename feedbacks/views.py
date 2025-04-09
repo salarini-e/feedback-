@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.db.models import Avg, Count
 from .forms import FeedbackForm
 from servicos.models import Local_de_atendimento
-from .functions import get_feedback_distribution, get_frequencies
+from .functions import get_feedback_distribution, get_frequencies, get_valores_termometro
 
 def feedback(request, hash):
     local = get_object_or_404(Local_de_atendimento, hash=hash)
@@ -44,11 +44,12 @@ def painel_feedback(request, hash):
     negative_feedbacks = feedbacks.filter(satisfacao__lt=3)
     feedbacks_with_suggestions = feedbacks.exclude(sugestoes__isnull=True).exclude(sugestoes__exact="").exclude(sugestoes__iexact="n/h")  # Exclui 'n/h'
 
+    valores_satisfacao_geral = get_valores_termometro(feedbacks)
     summary = {
         
         'ambiente_dist': get_feedback_distribution(feedbacks, 'ambiente'),
         'tempo_espera_dist': get_feedback_distribution(feedbacks, 'tempo_espera'),
-        'satisfacao_dist': get_feedback_distribution(feedbacks, 'satisfacao'),
+        'satisfacao_dist': get_feedback_distribution(feedbacks, 'satisfacao'),  
         'atendimento_dist': get_feedback_distribution(feedbacks, 'atendimento'),
         'total_feedbacks': feedbacks.count(),
         'negative_feedbacks': feedbacks.filter(satisfacao__lt=3).count(),
@@ -86,7 +87,8 @@ def painel_feedback(request, hash):
         'negative_feedbacks': negative_feedbacks,
         'summary': summary_with_flags,
         'non_distribution_summary': non_distribution_summary,
-        'estatisticas': contexto_estatisticas
+        'estatisticas': contexto_estatisticas,
+        'valores_satisfacao_geral': valores_satisfacao_geral
     }
 
     if local.nome == 'SUBSECRETARIA DE TI':
