@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'core',
     'feedbacks',
     'servicos',
+    'pesquisas',
 
 ]
 
