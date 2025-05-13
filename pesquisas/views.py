@@ -116,7 +116,7 @@ def questionario_seharf_export_to_excel(request):
         'Moradia Compartilhada', 'Estado de Conservação', 'Tipo de Construção', 'Número de Quartos',
         'Número de Banheiros', 'Segurança', 'Tempo de Deslocamento', 'Rua Pavimentação',
         'Bairro Transporte Público', 'Rua Água Tratada', 'Rua Rede Esgoto', 'Fossa Séptica',
-        'Rua Rede Fluvial', 'Bairro Área Lazer', 'Bairro Escola', 'Rua Rede Elétrica',
+        'Rua Rede Pluvial', 'Bairro Área Lazer', 'Bairro Escola', 'Rua Rede Elétrica',
         'Rua Internet', 'Bairro Creche', 'Pavimentação', 'Gosta do Bairro', 'Onde Gostaria de Morar',
         'Melhor do Bairro', 'Sonho', 'Data de Criação'
     ]
