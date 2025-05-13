@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 ('rua_agua_tratada', models.BooleanField()),
                 ('rua_rede_esgoto', models.BooleanField()),
                 ('fossa_septica', models.BooleanField(blank=True, null=True)),
-                ('rua_rede_fluvial', models.BooleanField()),
+                ('rua_rede_pluvial', models.BooleanField()),
                 ('bairro_area_lazer', models.BooleanField()),
                 ('bairro_escola', models.BooleanField()),
                 ('rua_rede_eletrica', models.BooleanField()),
