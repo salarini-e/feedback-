@@ -62,7 +62,7 @@ def questionario_seharf(request):
             rua_agua_tratada=form_data.get('rua_agua_tratada') == 'sim',
             rua_rede_esgoto=form_data.get('rua_rede_esgoto') == 'sim',
             fossa_septica=form_data.get('fossa_septica') == 'sim',
-            rua_rede_fluvial=form_data.get('rua_rede_fluvial') == 'sim',
+            rua_rede_pluvial=form_data.get('rua_rede_pluvial') == 'sim',
             bairro_area_lazer=form_data.get('bairro_area_lazer') == 'sim',
             bairro_escola=form_data.get('bairro_escola') == 'sim',
             rua_rede_eletrica=form_data.get('rua_rede_eletrica') == 'sim',
@@ -116,7 +116,7 @@ def questionario_seharf_export_to_excel(request):
         'Moradia Compartilhada', 'Estado de Conservação', 'Tipo de Construção', 'Número de Quartos',
         'Número de Banheiros', 'Segurança', 'Tempo de Deslocamento', 'Rua Pavimentação',
         'Bairro Transporte Público', 'Rua Água Tratada', 'Rua Rede Esgoto', 'Fossa Séptica',
-        'Rua Rede Fluvial', 'Bairro Área Lazer', 'Bairro Escola', 'Rua Rede Elétrica',
+        'Rua Rede Pluvial', 'Bairro Área Lazer', 'Bairro Escola', 'Rua Rede Elétrica',
         'Rua Internet', 'Bairro Creche', 'Pavimentação', 'Gosta do Bairro', 'Onde Gostaria de Morar',
         'Melhor do Bairro', 'Sonho', 'Data de Criação'
     ]
@@ -133,7 +133,7 @@ def questionario_seharf_export_to_excel(request):
             questionario.estado_conservacao, questionario.tipo_construcao, questionario.num_quartos,
             questionario.num_banheiros, ', '.join(questionario.seguranca or []), questionario.tempo_deslocamento,
             questionario.rua_pavimentacao, questionario.bairro_transporte_publico, questionario.rua_agua_tratada,
-            questionario.rua_rede_esgoto, questionario.fossa_septica, questionario.rua_rede_fluvial,
+            questionario.rua_rede_esgoto, questionario.fossa_septica, questionario.rua_rede_pluvial,
             questionario.bairro_area_lazer, questionario.bairro_escola, questionario.rua_rede_eletrica,
             questionario.rua_internet, questionario.bairro_creche, questionario.pavimentacao,
             questionario.gosta_bairro, questionario.onde_gostaria_morar, questionario.melhor_bairro,
