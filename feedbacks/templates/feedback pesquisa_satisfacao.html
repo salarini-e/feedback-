@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>PMNF - Feedback+</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="/static/css/responsive.css">
+   <!-- fevicon -->
+   <link rel="icon" href="https://intranet.novafriburgo.rj.gov.br/static/brasao.ico" type="image/ico" />
+   <!-- font css -->
+   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.min.css">
+   <!-- Tweaks for older IEs-->
+   <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+   <div class="services_section layout_padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-4 d-flex">
+               <img class="logoPMNF" style="max-width: 300px;" src="https://intranet.novafriburgo.rj.gov.br/static/images/logo.png" alt="">
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+               <div class="w-100 d-flex">
+                  <h1 class="services_taital" style="margin-top: 5px;">AVALIE NOSSO ATENDIMENTO</h1>
+               </div>
+               <p class="services_text">Nos ajude a melhorar nossos serviços. Avalie a qualidade do atendimento que você recebeu e compartilhe sua experiência conosco!</p>
+            </div>
+         </div>
+
+         <!-- Progress Indicator -->
+         <!-- <div class="progress-indicator text-center mb-4">
+            <span id="step-indicator">Etapa 1 de 7</span>
+         </div> -->
+
+         <!-- Steps -->
+         <div id="steps-container">
+            <!-- Step 1: Internet -->
+            <div class="step">
+               <h1>Internet</h1>
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     {% if messages %}
+                     {% for message in messages %}
+                       <div class="alert {{ message.tags }}" role="alert">
+                         {{ message }}
+                       </div>
+                     {% endfor %}
+                   {% endif %}                   
+                     <div class="form-group d-flex flex-column" data-category="internet-item1">
+                        <label for="exampleFormControlSelect1">1. Qual sua avaliação sobre a estabilidade da conexão de internet?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="internet-item1" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="internet-item1" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="internet-item1" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="internet-item1" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="internet-item1" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="internet-item2">
+                        <label for="exampleFormControlSelect1">2. Como você avalia a velocidade da internet em relação ao contratado?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="internet-item2" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="internet-item2" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="internet-item2" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="internet-item2" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="internet-item2" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="internet-item3">
+                        <label for="exampleFormControlSelect1">3. A disponibilidade do serviço atende às necessidades do setor?</label>
+                        <div class="radio-group mx-auto">
+                           <label class="radio">
+                              <input type="radio" name="internet-item3" value="sim" onchange="toggleTextarea('internet-item3', false, this)">
+                              <span class="radio-label" data-value="sim">Sim</span>
+                           </label>
+                           <label class="radio">
+                              <input type="radio" name="internet-item3" value="nao" onchange="toggleTextarea('internet-item3', true, this)">
+                              <span class="radio-label" data-value="nao">Não</span>
+                           </label>
+                        </div>
+                        <textarea class="hidden" id="internet-item3-porque" name="internet-item3-porque" placeholder="Por quê?"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="internet-item4">
+                        <label for="exampleFormControlSelect1">4. Como você avalia o suporte técnico da empresa prestadora de internet?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="internet-item4" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="internet-item4" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="internet-item4" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="internet-item4" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="internet-item4" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="internet-item5">
+                        <label for="exampleFormControlSelect1">5. De 0 a 10, qual a nota que você avalia o serviço de internet?</label>
+                        <div class="rating-options d-flex justify-content-center">
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="0">
+                              <span class="rating-value">0</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="1">
+                              <span class="rating-value">1</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="2">
+                              <span class="rating-value">2</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="3">
+                              <span class="rating-value">3</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="4">
+                              <span class="rating-value">4</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="5">
+                              <span class="rating-value">5</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="6">
+                              <span class="rating-value">6</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="7">
+                              <span class="rating-value">7</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="8">
+                              <span class="rating-value">8</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="9">
+                              <span class="rating-value">9</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="internet-item5" value="10">
+                              <span class="rating-value">10</span>
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+            </div>
+
+            <!-- Step 2: Telefonia Digital -->
+            <div class="step">
+               <h1>Telefonia Digital</h1>
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="telefonia-item1">
+                        <label for="exampleFormControlSelect1">1. Como você avalia a qualidade das chamadas realizadsa (clareza e estabilidade)?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="telefonia-item1" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="telefonia-item1" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="telefonia-item1" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="telefonia-item1" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="telefonia-item1" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="telefonia-item2">
+                        <label for="exampleFormControlSelect1">2. A cobertura do serviço de telefonia atende adequadamente ao setor?</label>
+                        <div class="radio-group mx-auto">
+                           <label class="radio">
+                              <input type="radio" name="telefonia-item2" value="sim" onchange="toggleTextarea('telefonia-item2', false, this)">
+                              <span class="radio-label" data-value="sim">Sim</span>
+                           </label>
+                           <label class="radio">
+                              <input type="radio" name="telefonia-item2" value="nao" onchange="toggleTextarea('telefonia-item2', true, this)">
+                              <span class="radio-label" data-value="nao">Não</span>
+                           </label>
+                        </div>
+                        <textarea class="hidden" id="telefonia-item2-porque" name="telefonia-item2-porque" placeholder="Por quê?"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="telefonia-item3">
+                        <label for="exampleFormControlSelect1">3. Qual sua opnião sobre a rapidez na resolução de falhas no serviço?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="telefonia-item3" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="telefonia-item3" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="telefonia-item3" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="telefonia-item3" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="telefonia-item3" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="suporte-item4">
+                        <label for="exampleFormControlSelect1">4. A funcionalidade e as ferramentas disponíveis no sistema de telefonia digital atendem às demandas?</label>
+                        <div class="radio-group mx-auto">
+                           <label class="radio">
+                              <input type="radio" name="suporte-item4" value="sim" onchange="toggleTextarea('suporte-item4', false, this)">
+                              <span class="radio-label" data-value="sim">Sim</span>
+                           </label>
+                           <label class="radio">
+                              <input type="radio" name="suporte-item4" value="nao" onchange="toggleTextarea('suporte-item4', true, this)">
+                              <span class="radio-label" data-value="nao">Não</span>
+                           </label>
+                        </div>
+                        <textarea class="hidden" id="suporte-item4-porque" name="suporte-item4-porque" placeholder="Por quê?"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="telefonia-item5">
+                        <label for="exampleFormControlSelect1">5. Como você avalia a equipe técnica da empresa que presta o serviço de telefonia digital contratado?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="telefonia-item5" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="telefonia-item5" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="telefonia-item5" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="telefonia-item5" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="telefonia-item5" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="telefonia-item6">
+                        <label for="exampleFormControlSelect1">6. De 0 a 10, qual a nota que você avalia o serviço de telefonia digital?</label>
+                        <div class="rating-options d-flex justify-content-center">
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="0">
+                              <span class="rating-value">0</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="1">
+                              <span class="rating-value">1</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="2">
+                              <span class="rating-value">2</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="3">
+                              <span class="rating-value">3</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="4">
+                              <span class="rating-value">4</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="5">
+                              <span class="rating-value">5</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="6">
+                              <span class="rating-value">6</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="7">
+                              <span class="rating-value">7</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="8">
+                              <span class="rating-value">8</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="9">
+                              <span class="rating-value">9</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="telefonia-item6" value="10">
+                              <span class="rating-value">10</span>
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+            </div>
+            <!-- Step 3: Locação de Impressora -->
+            <div class="step">
+               <h1>Locação de Impressora</h1>
+               <!-- Add questions here -->
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="impressora-item1">
+                        <label for="exampleFormControlSelect1">1. Como você avalia a qualidade de impressão (texto e imagens)?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="impressora-item1" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="impressora-item1" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="impressora-item1" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="impressora-item1" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="impressora-item1" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="impressora-item2">
+                        <label for="exampleFormControlSelect1">2. Como você avalia o suporte técnico para resolução de problemas?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="impressora-item2" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="impressora-item2" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="impressora-item2" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="impressora-item2" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="impressora-item2" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="impressora-item3">
+                        <label for="exampleFormControlSelect1">3. Sobre a disponibilidade de suprimentos (cartuchos de tinta, etc), qual sua avliação?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="impressora-item3" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="impressora-item3" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="impressora-item3" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="impressora-item3" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="impressora-item3" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="impressora-item4">
+                        <label for="exampleFormControlSelect1">4. Qual sua avaliação quanto ao tempo de resolução de problemas técnicos relacionados às impressoras?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="impressora-item4" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="impressora-item4" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="impressora-item4" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="impressora-item4" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="impressora-item4" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="impressora-item5">
+                        <label for="exampleFormControlSelect1">5. As impressoras atendem às necessidades em termos de volume de impressão?</label>
+                        <div class="radio-group mx-auto">
+                           <label class="radio">
+                              <input type="radio" name="impressora-item5" value="sim" onchange="toggleTextarea('impressora-item5', false, this)">
+                              <span class="radio-label" data-value="sim">Sim</span>
+                           </label>
+                           <label class="radio">
+                              <input type="radio" name="impressora-item5" value="nao" onchange="toggleTextarea('impressora-item5', true, this)">
+                              <span class="radio-label" data-value="nao">Não</span>
+                           </label>
+                        </div>
+                        <textarea class="hidden" id="impressora-item5-porque" name="impressora-item5-porque" placeholder="Por quê?"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+            </div>
+            <!-- Step 4: Sistema de Gestão Municipal -->
+            <div class="step">
+               <h1>Sistema de Gestão Municipal</h1>
+               <!-- Add questions here -->
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="sistema-gestao">
+                        <label for="exampleFormControlSelect1">1. Qual sistema de gestão você utiliza?</label>
+                        <select class="form-control mx-auto" id="exampleFormControlSelect1" name="sistema-gestao">
+                           <option>Escolha uma opção</option>
+                           <option value="pro">Protocolo</option>
+                           <option value="gma">GMA</option>
+                           <option value="tri">Tributário</option>
+                           <option value="out">Outro</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="sistema-gestao-item2">
+                        <label for="exampleFormControlSelect1">2. O sistema atende às necessidades do setor em termos de funcionalidade?</label>
+                        <div class="radio-group mx-auto">
+                           <label class="radio">
+                              <input type="radio" name="sistema-gestao-item2" value="sim" onchange="toggleTextarea('sistema-gestao-item2', false, this)">
+                              <span class="radio-label" data-value="sim">Sim</span>
+                           </label>
+                           <label class="radio">
+                              <input type="radio" name="sistema-gestao-item2" value="nao" onchange="toggleTextarea('sistema-gestao-item2', true, this)">
+                              <span class="radio-label" data-value="nao">Não</span>
+                           </label>
+                        </div>
+                        <textarea class="hidden" id="sistema-gestao-item2-porque" name="sistema-gestao-item2-porque" placeholder="Por quê?"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="sistema-gestao-item3">
+                        <label for="exampleFormControlSelect1">3. A disponibilidade do sistema atende às necessidades do setor?</label>
+                        <div class="radio-group mx-auto">
+                           <label class="radio">
+                              <input type="radio" name="sistema-gestao-item3" value="sim" onchange="toggleTextarea('sistema-gestao-item3', false, this)">
+                              <span class="radio-label" data-value="sim">Sim</span>
+                           </label>
+                           <label class="radio">
+                              <input type="radio" name="sistema-gestao-item3" value="nao" onchange="toggleTextarea('sistema-gestao-item3', true, this)">
+                              <span class="radio-label" data-value="nao">Não</span>
+                           </label>
+                        </div>
+                        <textarea class="hidden" id="sistema-gestao-item3-porque" name="sistema-gestao-item3-porque" placeholder="Por quê?"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="sistema-gestao-item4">
+                        <label for="exampleFormControlSelect1">4. Qual sua opnião sobre a eficiência do suporte técnico prestado?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="sistema-gestao-item4" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="sistema-gestao-item4" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="sistema-gestao-item4" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="sistema-gestao-item4" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="sistema-gestao-item4" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="sistema-gestao-item5">
+                        <label for="exampleFormControlSelect1">5. Como você avalia a rapidez do sistema para processar informações e gerar relatórios?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="sistema-gestao-item5" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="sistema-gestao-item5" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="sistema-gestao-item5" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="sistema-gestao-item5" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="sistema-gestao-item5" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+            </div>            
+            <!-- Step 5: Processo Digital -->
+            <div class="step">
+               <h1>Processo Digital</h1>
+               <!-- Add questions here -->
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="processo-item1">
+                        <label for="exampleFormControlSelect1">1. Como você avalia a facilidade de uso das ferramentas para elaboração de processos e documentos?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="processo-item1" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="processo-item1" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="processo-item1" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="processo-item1" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="processo-item1" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="processo-item2">
+                        <label for="exampleFormControlSelect1">2. O processo digital contribuiu para a melhoria da organizaçãoe estruturação dos documentos e processos?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="processo-item2" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="processo-item2" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="processo-item2" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="processo-item2" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="processo-item2" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="processo-item3">
+                        <label for="exampleFormControlSelect1">3. O tempo necessário para crir e elaborar um documento ou processo digital foi reduzido?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="processo-item3" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="processo-item3" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="processo-item3" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="processo-item3" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="processo-item3" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+            </div>
+            <!-- Step 6: Tramitação de Processo -->
+            <div class="step">
+               <h1>Tramitação de Processo</h1>
+               <!-- Add questions here -->
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="tramitacao-item1">
+                        <label for="exampleFormControlSelect1">1. A tramitação de processos e documentos digitais ocorre de maneira fluida e sem problemas?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="tramitacao-item1" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="tramitacao-item1" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="tramitacao-item1" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="tramitacao-item1" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="tramitacao-item1" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="tramitacao-item2">
+                        <label for="exampleFormControlSelect1">2. O acompanhamento da tramitação dos documentos (status, localizações, prazos) é claro e eficiente?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="tramitacao-item2" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="tramitacao-item2" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="tramitacao-item2" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="tramitacao-item2" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="tramitacao-item2" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="tramitacao-item3">
+                        <label for="exampleFormControlSelect1">3. Qual sua avaliação sobre a agilidade da tramitação de processos e documentos em formato digital?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="tramitacao-item3" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="tramitacao-item3" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="tramitacao-item3" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="tramitacao-item3" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="tramitacao-item3" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="tramitacao-item4">
+                        <label for="exampleFormControlSelect1">4. Como você avalia a transparência na tramitação dos processos e documentos digitais?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="tramitacao-item4" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="tramitacao-item4" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="tramitacao-item4" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="tramitacao-item4" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="tramitacao-item4" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            
+            </div>
+            
+            </div>
+            <hr class="mt-3">
+            <!-- Step 7: Suporte e Treinamento -->
+            <div class="step">
+               <h1>Suporte e Treinamento</h1>
+               <!-- Add questions here -->
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="suporte-item1">
+                        <label for="exampleFormControlSelect1">1. Como você avalia o suporte oferecido para solucionar dúvidas e problemas relacionados ao processo digital?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="suporte-item1" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="suporte-item1" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="suporte-item1" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="suporte-item1" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="suporte-item1" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="suporte-item2">
+                        <label for="exampleFormControlSelect1">2. O treinamento fornecido para a utilização das ferramentas do processo digital foi adequado e suficiente? </label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="suporte-item2" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="suporte-item2" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="suporte-item2" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="suporte-item2" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="suporte-item2" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">                              
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="suporte-item3">
+                        <label for="exampleFormControlSelect1">3. A equipe de TI está acessível e pronta para oferecer ajuda sempre que necessário?</label>
+                        <div class="emoji-rating mx-auto">
+                           <span class="emoji" data-value="1" data-category="suporte-item3" style="color: red;"><i class="fa-solid fa-face-angry"></i></span>
+                           <span class="emoji" data-value="2" data-category="suporte-item3" style="color: orange;"><i class="fa-solid fa-face-frown"></i></span>
+                           <span class="emoji" data-value="3" data-category="suporte-item3" style="color: rgb(235, 219, 0);"><i class="fa-solid fa-face-meh"></i></span>
+                           <span class="emoji" data-value="4" data-category="suporte-item3" style="color: rgb(61, 212, 61);"><i class="fa-solid fa-face-smile-beam"></i></span>
+                           <span class="emoji" data-value="5" data-category="suporte-item3" style="color: green;"><i class="fa-solid fa-face-grin-wink"></i></span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">                              
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column" data-category="suporte-item4">
+                        <label for="exampleFormControlSelect1">4. De 0 a 10, qual a nota que você avalia o sistema de processo digital?</label>
+                        <div class="rating-options d-flex justify-content-center">
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="0">
+                              <span class="rating-value">0</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="1">
+                              <span class="rating-value">1</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="2">
+                              <span class="rating-value">2</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="3">
+                              <span class="rating-value">3</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="4">
+                              <span class="rating-value">4</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="5">
+                              <span class="rating-value">5</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="6">
+                              <span class="rating-value">6</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="7">
+                              <span class="rating-value">7</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="8">
+                              <span class="rating-value">8</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="9">
+                              <span class="rating-value">9</span>
+                           </label>
+                           <label class="rating-label mx-2">
+                              <input type="radio" name="processo-digital-item5" value="10">
+                              <span class="rating-value">10</span>
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
+            </div>
+            <!-- Final Question -->
+            <div class="step">
+               <h1>Contato</h1>
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <div class="form-group d-flex flex-column">
+                        <label for="exampleFormControlSelect1">Você gostaria de deixar seu nome ou telefone para que o Secretário ou Líder da {{local.nome}} pudesse entrar em contato para entender melhor suas avaliações e sugestões?</label>
+                        <div class="radio-group mx-auto mt-3">
+                           <label class="radio">
+                              <input type="radio" name="resposta" value="sim">
+                              <span class="radio-label" data-value="sim">Sim</span>
+                           </label>
+                           <label class="radio">
+                              <input type="radio" name="resposta" value="nao">
+                              <span class="radio-label" data-value="nao">Não</span>
+                           </label>
+                        </div>                                                    
+                     </div>
+                  </div>
+               </div>
+               <div id="contato" class="row hidden">
+                  <div class="col d-flex flex-column" style="text-align: center;">
+                     <div class="form-group d-flex flex-column mx-auto" style="max-width: 350px;">
+                        <label for="nome" class="mr-auto">Nome</label>
+                        <input type="text" class="form-control" id="nome">
+                     </div>
+                     <div class="form-group d-flex flex-column mx-auto" style="max-width: 350px;">
+                        <label for="telefone" class="mr-auto">Telefone</label>
+                        <input type="text" class="form-control" id="telefone">
+                     </div>
+                  </div>
+               </div>
+               <!-- Add the "Enviar" button -->
+               <div class="row mt-4">
+                  <div class="col text-center">
+                     <button id="" class="btn btn-primary seemore_bt">Enviar</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <div class="contact_section layout_padding mt-5">
+      <div class="container">
+         <div class="row">
+         
+            <div class="col-md-8">
+               <div class="location_text">
+                  <ul>
+                     <li>
+                        <a href="#">
+                           <span class="padding_left_10 active"><i class="fa fa-map-marker"
+                                 aria-hidden="true"></i></span>Av. Alberto Braune, 225 - Centro, Nova Friburgo - RJ, 28613-001</a>
+                     </li><br>
+                     <li class="mt-4">
+                        <a href="#">
+                           <span class="padding_left_10"><i class="fa fa-phone" aria-hidden="true"></i></span>(22) 2525-9100
+                        </a>
+                     </li>
+
+                  </ul>
+               </div>
+             
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="copyright_section">
+      <div class="container">
+         <p class="copyright_text">2025 © Subsecretaria de Tecnologia da Informação - <a href="https://pmnf.rj.gov.br/">PMNF</a></p>
+      </div>
+   </div>
+   
+   <!-- Javascript files-->
+   <script src="/static/js/jquery.min.js"></script>
+   <script src="/static/js/popper.min.js"></script>
+   <script src="/static/js/bootstrap.bundle.min.js"></script>
+   <script src="/static/js/jquery-3.0.0.min.js"></script>
+   <script src="/static/js/plugin.js"></script>
+   <!-- sidebar -->
+   <script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="/static/js/custom.js"></script>
+   <!-- javascript -->
+
+   <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         const emojis = document.querySelectorAll(".emoji-rating .emoji");
+         const radioButtons = document.querySelectorAll(".radio-group input");
+         const contatoDiv = document.getElementById("contato");
+         const enviarBtn = document.querySelector(".seemore_bt");
+         const nomeInput = document.getElementById("nome");
+         const telefoneInput = document.getElementById("telefone");
+
+         let respostas = {};
+
+         function updateResposta(category, value) {
+            respostas[category] = value;
+         }
+
+         emojis.forEach(emoji => {
+            emoji.addEventListener("click", function () {
+               const category = this.getAttribute("data-category");
+               const value = this.getAttribute("data-value");
+               updateResposta(category, value);
+
+               const parentDiv = this.closest(".form-group");
+               parentDiv.querySelectorAll(".emoji").forEach(e => e.style.opacity = "0.3");
+               this.style.opacity = "1";
+            });
+         });
+
+         radioButtons.forEach(radio => {
+            radio.addEventListener("change", function () {
+               const category = this.name;
+               const value = this.value;
+               updateResposta(category, value);
+
+               if (category === "resposta" && value === "sim") {
+                  contatoDiv.classList.remove("hidden");
+               } else if (category === "resposta" && value === "nao") {
+                  contatoDiv.classList.add("hidden");
+                  nomeInput.value = "";
+                  telefoneInput.value = "";
+                  delete respostas["nome"];
+                  delete respostas["telefone"];
+               }
+            });
+         });
+
+         nomeInput.addEventListener("input", function () {
+            respostas["nome"] = this.value.trim();
+         });
+
+         telefoneInput.addEventListener("input", function () {
+            respostas["telefone"] = this.value.trim();
+         });
+
+         if (enviarBtn) {
+            enviarBtn.addEventListener("click", function () {
+               // Remover o atributo 'disabled' de todos os campos antes de enviar
+              
+
+               console.log("Respostas:", respostas);
+
+               const form = document.createElement("form");
+               form.method = "POST";
+               form.action = "/feedback/{{local.hash}}/";
+
+               const csrfInput = document.createElement("input");
+               csrfInput.type = "hidden";
+               csrfInput.name = "csrfmiddlewaretoken";
+               csrfInput.value = '{{ csrf_token }}';
+               form.appendChild(csrfInput);
+
+               Object.keys(respostas).forEach(key => {
+                  const input = document.createElement("input");
+                  input.type = "hidden";
+                  input.name = key.replace(/-/g, '_'); // Replace hyphens with underscores for model compatibility
+                  input.value = respostas[key];
+                  form.appendChild(input);
+               });
+               document.querySelectorAll('[id$="-porque"]').forEach(textarea => {   
+                  if (!textarea.classList.contains('hidden')) {
+                     const input = document.createElement("input");
+                     input.type = "hidden";
+                     input.name = textarea.name.replace(/-/g, '_'); // Replace hyphens with underscores for model compatibility
+                     input.value = textarea.value;
+                     form.appendChild(input);
+                  }
+               });
+               document.body.appendChild(form);
+               form.submit();
+            });
+         }
+      });
+
+      function toggleTextarea(category, show, e) {
+         const textarea = document.getElementById(`${category}-porque`);
+         if (textarea) {
+            textarea.classList.toggle('hidden', !show);
+            textarea.disabled = !show; // Habilitar/desabilitar o campo
+            if (!show) textarea.value = ''; // Clear the textarea if hidden
+         }
+         if (e) {
+            const span = e.closest("label").querySelector("span");
+            if (span) {
+               span.style.color = show ? "red" : "green";
+            }
+            // e.style.color = show ? "red" : "black"; // Set label color to red if textarea is shown, otherwise black
+         }
+      }
+   </script>
+
+   <style>
+      label{
+         font-weight: bold;
+         font-size: large  ;
+      }
+      .emoji-rating {
+         display: flex;
+         gap: 15px;
+         font-size: 3rem;
+         cursor: pointer;
+      }
+      /* #selected-rating i{
+         transform: scale(2);
+         margin-left: 10px;
+      } */
+      .emoji {         
+         margin-left: 10px;
+         margin-right: 10px;         
+         
+         transition: transform 0.2s ease-in-out;
+      }
+      .emoji:hover {
+         transform: scale(1.5);
+      }
+      textarea {
+         width: 100%;
+         min-height: 120px;
+         padding: 12px 16px;
+         border: 1px solid #cfcfcf;
+         border-radius: 12px;
+         font-size: 16px;
+         font-family: 'Roboto', sans-serif;
+         color: #333;
+         background-color: #fff;
+         outline: none;
+         transition: all 0.3s ease-in-out;
+         box-shadow: 2px 2px 10px rgba(126, 126, 126, 0.1);
+         resize: vertical;
+      }
+
+      textarea:focus {
+         border-color: #00ff2a;
+         background-color: #ffffff;
+         box-shadow: 4px 4px 15px rgba(0, 123, 255, 0.2);
+      }
+      .radio-group {
+         display: flex;
+         gap: 15px;
+      }
+
+      .radio {
+         display: flex;
+         align-items: center;
+         cursor: pointer;
+         font-size: 16px;
+         font-family: 'Roboto', sans-serif;
+         position: relative;
+      }
+
+      .radio input {
+         display: none;
+      }
+
+      .radio-label {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         padding: 10px 20px;
+         border: 2px solid #ddd;
+         border-radius: 25px;
+         background: #f9f9f9;
+         color: #333;
+         transition: all 0.3s ease-in-out;
+         font-weight: bold;
+         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Verde para "Sim" */
+      .radio input[value="sim"]:checked + .radio-label {
+         /* background: #28a745; */
+         color: white;
+         border-color: #28a745;
+         box-shadow: 4px 4px 15px rgba(40, 167, 69, 0.3);
+      }
+
+      /* Vermelho para "Não" */
+      .radio input[value="nao"]:checked + .radio-label {
+         /* background: #dc3545; */
+         color: white;
+         border-color: #dc3545;
+         box-shadow: 4px 4px 15px rgba(220, 53, 69, 0.3);
+      }
+      .hidden {
+         display: none;
+      }
+      .services_taital{
+         min-width: 100%;         
+      }
+      .services_taital::after{
+         opacity: 0;
+      }
+      @media (max-width: 971px) {
+         .services_taital {
+            font-size: 1.5rem;
+            text-align: center;
+         }
+
+         .logoPMNF {
+            max-width: 200px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+         }
+
+         .emoji-rating {
+            font-size: 2rem;
+            gap: 10px;
+         }
+
+         .radio-label {
+            padding: 8px 16px;
+            font-size: 14px;
+         }
+
+         textarea {
+            font-size: 14px;
+            padding: 10px 14px;
+         }
+
+         .seemore_bt button {
+            font-size: 14px;
+            padding: 10px 20px;
+         }
+
+         .location_text ul li a {
+            font-size: 14px;
+         }
+      }
+      /* .logoPMNF{
+         
+      } */
+      .progress-indicator {
+         font-size: 1.2rem;
+         font-weight: bold;
+      }
+
+      .step {
+         margin-bottom: 20px;
+      }
+
+      .next-step {
+         margin-top: 20px;
+      }
+      .step h1{
+         text-align: center;
+         font-weight: bold;
+         text-transform: uppercase;
+      }
+      /* .emoji.selected {
+  transform: scale(1.3);
+  outline: 2px solid #444;
+  border-radius: 50%;
+} */
+   </style>
+
+</body>
+
+</html>

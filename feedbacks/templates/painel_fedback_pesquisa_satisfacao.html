@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Painel Pesquisa de Satisfação</title>
+   <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+   <link rel="icon" href="https://intranet.novafriburgo.rj.gov.br/static/brasao.ico" type="image/ico" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <style>
+      .my-0 {
+         margin-top: 0px;
+         margin-bottom: 0px;
+      }
+
+      .fa-solid {
+         font-size: 14pt;
+      }
+
+      body {
+         font-family: 'Roboto', sans-serif;
+         background-color: #f4f4f9;
+         color: #333;
+         margin: 0;
+         padding: 0;
+      }
+
+      .container {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 20px;
+      }
+
+      h1 {
+         font-size: 2.5rem;
+         color: #0056b3;
+         text-align: center;
+         margin-bottom: 20px;
+      }
+
+      h3 {
+         font-size: 1.8rem;
+         color: #444;
+         margin-bottom: 15px;
+      }
+
+      .summary-section {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+      }
+
+      .summary-card {
+         width: 23%;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         background: #fff;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         padding: 20px;
+         margin: 10px;
+         text-align: center;
+         transition: transform 0.2s ease-in-out;
+         text-decoration: none;
+         color: inherit;
+      }
+
+      .summary-card:hover {
+         transform: translateY(-5px);
+      }
+
+      .summary-card h5 {
+         font-size: 1.2rem;
+         color: #666;
+         margin-bottom: 10px;
+      }
+
+      .summary-card p {
+         font-size: 1.5rem;
+         font-weight: bold;
+         color: #28a745;
+      }
+
+      .feedback-table {
+         width: 100%;
+         border-collapse: collapse;
+         margin-top: 20px;
+         background: #fff;
+         border-radius: 10px;
+         overflow: hidden;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .feedback-table thead {
+         background-color: #0056b3;
+         color: #fff;
+      }
+
+      .feedback-table th,
+      .feedback-table td {
+         padding: 15px;
+         text-align: center;
+         border-bottom: 1px solid #ddd;
+      }
+
+      .feedback-table th {
+         font-size: 1rem;
+         font-weight: bold;
+      }
+
+      .feedback-table tbody tr:hover {
+         background-color: #f1f1f1;
+      }
+
+      .feedback-table .table-danger {
+         background-color: #ffe6e6;
+      }
+
+      .icon {
+         font-size: 1.5rem;
+         margin-right: 5px;
+      }
+
+      .modal {
+         display: none;
+         position: fixed;
+         z-index: 1000;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         overflow: auto;
+         background-color: rgba(0, 0, 0, 0.5);
+         justify-content: center;
+         align-items: center;
+      }
+
+      .modal-content {
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+         width: 90%;
+         max-width: 500px;
+         text-align: center;
+      }
+
+      .modal-header {
+         font-size: 1.5rem;
+         font-weight: bold;
+         margin-bottom: 10px;
+      }
+
+      .modal-footer button {
+         background-color: #0056b3;
+         color: #fff;
+         border: none;
+         padding: 10px 20px;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background-color 0.3s ease;
+      }
+
+      .modal-footer button:hover {
+         background-color: #003d80;
+      }
+
+      .modal-dialog {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         min-height: 100vh;
+         /* Ensures the modal is vertically centered */
+         margin: 0;
+         /* Removes default margin */
+      }
+
+      .statistics-section {
+         margin-top: 30px;
+      }
+
+      .statistics-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+         gap: 20px;
+      }
+
+      .stat-card {
+         display: flex;
+         align-items: center;
+         background: #fff;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         padding: 15px;
+         transition: transform 0.2s ease-in-out;
+      }
+
+      .stat-card:hover {
+         transform: translateY(-5px);
+      }
+
+      .stat-icon {
+         width: 60px;
+         height: 60px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 50%;
+         color: #fff;
+         font-size: 1.5rem;
+         margin-right: 15px;
+      }
+
+      .stat-info h5 {
+         font-size: 1.2rem;
+         color: #333;
+         margin: 0;
+      }
+
+      .stat-info p {
+         font-size: 1.5rem;
+         font-weight: bold;
+         color: #0056b3;
+         margin: 5px 0 0;
+      }
+
+      .distribution-section {
+         margin-top: 30px;
+      }
+
+      .distribution-grid {
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+      }
+
+      .distribution-card {
+         background: #fff;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         padding: 15px;
+      }
+
+      .distribution-content {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 20px;
+         align-items: flex-start;
+      }
+
+      .distribution-table {
+         width: 60%;
+         border-collapse: collapse;
+      }
+
+      .distribution-table th,
+      .distribution-table td {
+         padding: 10px;
+         text-align: center;
+         border: 1px solid #ddd;
+      }
+
+      .distribution-table th {
+         background-color: #0056b3;
+         color: #fff;
+      }
+
+      .distribution-table tbody tr:hover {
+         background-color: #f1f1f1;
+      }
+
+      .distribution-chart {
+         flex: 1;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .distribution-chart canvas {
+         max-width: 100%;
+         height: auto;
+      }
+
+      .chart {
+         flex: 1;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100%;
+         /* Ocupa toda a altura disponível */
+      }
+
+      .chart canvas {
+         width: 100% !important;
+         /* Ocupa toda a largura disponível */
+         height: auto !important;
+         /* Ajusta a altura proporcionalmente */
+      }
+
+      .statistics-info {
+         flex: 1;
+         background: #f9f9f900;
+         border-radius: 10px;
+         padding: 15px;
+         /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+      }
+
+      .statistics-info p {
+         margin: 5px 0;
+         font-size: 1rem;
+         color: #333;
+      }
+
+      .hidden {
+         display: none;
+      }
+
+      #termometro .chart-container {
+         position: relative;
+         /* width: 100%; */
+         /* max-width: 700px; */
+         height: 300px;
+         margin: auto;
+      }
+
+      #termometro .gradient-line {
+         position: absolute;
+         top: 50%;
+         height: 8px;
+         border-radius: 4px;
+         transform: translateY(-50%);
+      }
+
+      #termometro .point {
+         position: absolute;
+         top: calc(50% + 30px);
+         /* font-size: 24px; */
+         transform: translateX(-50%);
+         transition: all 0.3s ease;
+      }
+
+      #termometro .label {
+         position: absolute;
+         top: calc(50% + 60px);
+         font-size: 14px;
+         transform: translateX(-50%);
+         color: #333;
+      }
+
+      #termometro .trend-bubble {
+         position: absolute;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         transform: translateX(-50%);
+      }
+
+      #termometro .trend-point {
+         font-size: 24px;
+         /* border: 2px solid black; */
+         border-radius: 50%;
+         /* padding: 2px;   */
+         background: white;
+         z-index: 10;
+      }
+
+      #termometro .bubble-tail {
+         width: 2px;
+         height: 15px;
+         background: black;
+         margin-top: 2px;
+      }
+
+      .mx-auto {
+         margin: 0 auto;
+      }
+
+      .d-flex {
+         display: flex;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container">
+      <a href="javascript:history.back()" class="btn btn-secondary mb-3">
+         <i class="fa-solid fa-arrow-left mr-2"></i> Voltar
+      </a>
+      <h1>Painel Pesquisa de Satisfação</h1>
+      <div class="summary-section">
+         <button onclick="showSection('distribution-section')" class="summary-card">
+            <h5>Distribuição</h5>
+            <p><i class="fa-solid fa-chart-pie" style="color: #0056b3;"></i></p>
+         </button>
+         <button onclick="showSection('pesquisa-section')" class="summary-card">
+            <h5>Detalhes</h5>
+            <p><i class="fa-solid fa-list" style="color: #28a745;"></i></p>
+         </button>
+         <button onclick="showSection('sugestoes-section')" class="summary-card">
+            <h5>Sugestões</h5>
+            <p><i class="fa-solid fa-envelope" style="color: #ffc107;"></i></p>
+         </button>
+      </div>
+      <div id="distribution-section" class="distribution-section hidden">
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Distribuição da Pesquisa
+         </h3>
+         <div class="distribution-grid">
+            {% for item in summary %}
+            {% if item.is_distribution %}
+            <div class="distribution-card">
+               <h5 style="text-align: center; color: #444;">{{ item.metric }}</h5>
+               <div class="distribution-content">
+                  <div class="d-flex flex-column">
+                     <div class="statistics-info">
+                        <span><strong>Moda:</strong> {{ item.moda|default:"-" }}</span> <span
+                           style="margin-left: 10px;"><strong class="ms-4">Mediana:</strong> {{ item.mediana|default:"-"
+                           }}</span>
+                     </div>
+                     <table class="distribution-table">
+                        <thead>
+                           <tr>
+                              <th>Nota</th>
+                              <th>Quantidade</th>
+                              <th>Porcentagem</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for value, data in item.data.items %}
+                           <tr>
+                              <td>{{ value }}</td>
+                              <td>{{ data.count }}</td>
+                              <td>{{ data.percent }}%</td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="chart w-100">
+                     <canvas width="" id="chart-bar-{{item.metric|lower}}"></canvas>
+                  </div>
+               </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+         </div>
+      </div>
+      <div id="pesquisa-section" class="feedback-section ">
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Detalhes das Pesquisas
+            <br>(Total: {{ pesquisas.count }})</h3>
+         <table class="feedback-table">
+            <thead>
+               <tr>
+                  <th>Data</th>
+                  <th>Internet</th>
+                  <th>Telefonia</th>
+                  <th>Impressora</th>
+                  <th>Sistema Gestão</th>
+                  <th>Processo Digital</th>
+                  <th>Tramitação</th>
+                  <th>Suporte</th>
+                  <th>Sugestões</th>
+                  <th>Contato</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for pesquisa in pesquisas %}
+               <tr>
+                  <td>{{ pesquisa.dt_inclusao|date:"d/m/Y H:i" }}</td>
+                  <td>
+                     {{ pesquisa.internet_item1 }}, {{ pesquisa.internet_item2 }}, {{ pesquisa.internet_item3 }}, {{ pesquisa.internet_item4 }}
+                  </td>
+                  <td>
+                     {{ pesquisa.telefonia_item1 }}, {{ pesquisa.telefonia_item2 }}, {{ pesquisa.telefonia_item3 }}, {{ pesquisa.suporte_item4 }}, {{ pesquisa.telefonia_item5 }}
+                  </td>
+                  <td>
+                     {{ pesquisa.impressora_item1 }}, {{ pesquisa.impressora_item2 }}, {{ pesquisa.impressora_item3 }}, {{ pesquisa.impressora_item4 }}, {{ pesquisa.impressora_item5 }}
+                  </td>
+                  <td>
+                     {{ pesquisa.sistema_gestao_item2 }}, {{ pesquisa.sistema_gestao_item3 }}, {{ pesquisa.sistema_gestao_item4 }}, {{ pesquisa.sistema_gestao_item5 }}
+                  </td>
+                  <td>
+                     {{ pesquisa.processo_item1 }}, {{ pesquisa.processo_item2 }}, {{ pesquisa.processo_item3 }}
+                  </td>
+                  <td>
+                     {{ pesquisa.tramitacao_item1 }}, {{ pesquisa.tramitacao_item2 }}, {{ pesquisa.tramitacao_item3 }}, {{ pesquisa.tramitacao_item4 }}
+                  </td>
+                  <td>
+                     {{ pesquisa.suporte_item1 }}, {{ pesquisa.suporte_item2 }}, {{ pesquisa.suporte_item3 }}, {{ pesquisa.suporte_item4 }}
+                  </td>
+                  <td>
+                     {% if pesquisa.internet_item3_porque %}Internet: {{ pesquisa.internet_item3_porque }}<br>{% endif %}
+                     {% if pesquisa.telefonia_item2_porque %}Telefonia: {{ pesquisa.telefonia_item2_porque }}<br>{% endif %}
+                     {% if pesquisa.suporte_item4_porque %}Suporte: {{ pesquisa.suporte_item4_porque }}<br>{% endif %}
+                     {% if pesquisa.impressora_item5_porque %}Impressora: {{ pesquisa.impressora_item5_porque }}<br>{% endif %}
+                     {% if pesquisa.sistema_gestao_item2_porque %}Gestão: {{ pesquisa.sistema_gestao_item2_porque }}<br>{% endif %}
+                     {% if pesquisa.sistema_gestao_item3porque %}Gestão: {{ pesquisa.sistema_gestao_item3porque }}<br>{% endif %}
+                  </td>
+                  <td>
+                     {% if pesquisa.resposta == 'sim' %}
+                        {{ pesquisa.contato_nome }}<br>{{ pesquisa.contato_telefone }}
+                     {% else %}
+                        Não informado
+                     {% endif %}
+                  </td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+      <div id="sugestoes-section" class="hidden">
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Sugestões</h3>
+         <div class="suggestions-list">
+            <ul style="list-style: none; padding: 0;">
+               {% for pesquisa in pesquisas %}
+               {% if pesquisa.internet_item3_porque or pesquisa.telefonia_item2_porque or pesquisa.suporte_item4_porque or pesquisa.impressora_item5_porque or pesquisa.sistema_gestao_item2_porque or pesquisa.sistema_gestao_item3porque %}
+               <li style="margin-bottom: 15px; padding: 15px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                     <p><strong>Data:</strong> {{ pesquisa.dt_inclusao|date:"d/m/Y H:i" }}</p>
+                  </div>
+                  <p>
+                     {% if pesquisa.internet_item3_porque %}<strong>Internet:</strong> {{ pesquisa.internet_item3_porque }}<br>{% endif %}
+                     {% if pesquisa.telefonia_item2_porque %}<strong>Telefonia:</strong> {{ pesquisa.telefonia_item2_porque }}<br>{% endif %}
+                     {% if pesquisa.suporte_item4_porque %}<strong>Suporte:</strong> {{ pesquisa.suporte_item4_porque }}<br>{% endif %}
+                     {% if pesquisa.impressora_item5_porque %}<strong>Impressora:</strong> {{ pesquisa.impressora_item5_porque }}<br>{% endif %}
+                     {% if pesquisa.sistema_gestao_item2_porque %}<strong>Gestão:</strong> {{ pesquisa.sistema_gestao_item2_porque }}<br>{% endif %}
+                     {% if pesquisa.sistema_gestao_item3porque %}<strong>Gestão:</strong> {{ pesquisa.sistema_gestao_item3porque }}<br>{% endif %}
+                  </p>
+                  {% if pesquisa.resposta == 'sim' %}
+                  <p><strong>Contato:</strong> {{ pesquisa.contato_nome }} - {{ pesquisa.contato_telefone }}</p>
+                  {% endif %}
+               </li>
+               {% endif %}
+               {% endfor %}
+            </ul>
+         </div>
+      </div>
+   </div>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         {% for item in summary %}
+         {% if item.is_distribution %}
+         {
+            let metricId = "{{ item.metric|slugify }}";
+            let labels = ["1", "2", "3", "4", "5"];
+            let dataCounts = [
+               {% for value, data in item.data.items %}
+               {{ data.count }},
+               {% endfor %}
+            ];
+            let backgroundColors = ["#ffcccc", "#ffe6cc", "#ffffcc", "#e6ffcc", "#ccffcc"];
+            let borderColors = ["#ff9999", "#ffcc999", "#ffff99", "#ccff99", "#99ff99"];
+            let barCanvas = document.getElementById("chart-bar-" + metricId);
+            if (barCanvas) {
+               let ctxBar = barCanvas.getContext("2d");
+               new Chart(ctxBar, {
+                  type: "bar",
+                  data: {
+                     labels: labels,
+                     datasets: [{
+                        label: "Distribuição de {{ item.metric }}",
+                        data: dataCounts,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                     }]
+                  },
+                  options: {
+                     responsive: true,
+                     plugins: {
+                        legend: {
+                           display: false
+                        },
+                        tooltip: {
+                           callbacks: {
+                              label: function (context) {
+                                 return `Quantidade: ${context.raw}`;
+                              }
+                           }
+                        }
+                     },
+                     scales: {
+                        x: {
+                           title: {
+                              display: true,
+                              text: "Notas"
+                           }
+                        },
+                        y: {
+                           title: {
+                              display: true,
+                              text: "Quantidade"
+                           },
+                           beginAtZero: true
+                        }
+                     }
+                  }
+               });
+            }
+         }
+         {% endif %}
+         {% endfor %}
+      });
+
+      function showSection(sectionId) {
+         document.querySelectorAll('#distribution-section, #pesquisa-section, #sugestoes-section').forEach(section => {
+            section.classList.add('hidden');
+         });
+         const selectedSection = document.getElementById(sectionId);
+         if (selectedSection) {
+            selectedSection.classList.remove('hidden');
+         }
+      }
+   </script>
+</body>
+
+</html>
