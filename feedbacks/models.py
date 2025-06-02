@@ -63,7 +63,7 @@ class PesquisaSatisfacao(models.Model):
     internet_item3 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
     internet_item3_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
     internet_item4 = models.IntegerField()
-    internet_item5 = models.IntegerField()    
+    internet_item5 = models.CharField(null=True, max_length=10)
 
     telefonia_item1 = models.IntegerField()
     telefonia_item2 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
@@ -72,7 +72,7 @@ class PesquisaSatisfacao(models.Model):
     suporte_item4 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')], verbose_name="Telefonia Item 4")
     suporte_item4_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo", verbose_name="Telefonia Item 4")
     telefonia_item5 = models.IntegerField()
-    telefonia_item6 = models.IntegerField()
+    telefonia_item6 = models.CharField(null=True, max_length=10)
 
     impressora_item1 = models.IntegerField()
     impressora_item2 = models.IntegerField()
@@ -80,7 +80,7 @@ class PesquisaSatisfacao(models.Model):
     impressora_item4 = models.IntegerField()
     impressora_item5 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
     impressora_item5_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
-    impressora_item6 = models.IntegerField()
+    impressora_item6 = models.CharField(null=True, max_length=10)
 
     CHOICES_SISTEMA = [
         ('pro', 'Protocolo'),
@@ -110,7 +110,7 @@ class PesquisaSatisfacao(models.Model):
     suporte_item2 = models.IntegerField()
     suporte_item3 = models.IntegerField()
     suporte_item4 = models.IntegerField()
-    
+
     resposta = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')], blank=True, null=True)    
     contato_nome = models.CharField(max_length=255, blank=True, null=True)
     contato_telefone = models.CharField(max_length=20, blank=True, null=True)
