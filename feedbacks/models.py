@@ -57,40 +57,60 @@ class Feedback(models.Model):
 class PesquisaSatisfacao(models.Model):
     local = models.ForeignKey(Local_de_atendimento, on_delete=models.CASCADE, related_name='pesquisas', null=True, blank=True)
     dt_inclusao = models.DateTimeField(auto_now_add=True)
+    
     internet_item1 = models.IntegerField()
     internet_item2 = models.IntegerField()
     internet_item3 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
     internet_item3_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
     internet_item4 = models.IntegerField()
+    internet_item5 = models.IntegerField()    
+
     telefonia_item1 = models.IntegerField()
     telefonia_item2 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
     telefonia_item2_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
     telefonia_item3 = models.IntegerField()
-    suporte_item4 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
-    suporte_item4_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
+    suporte_item4 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')], verbose_name="Telefonia Item 4")
+    suporte_item4_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo", verbose_name="Telefonia Item 4")
     telefonia_item5 = models.IntegerField()
+    telefonia_item6 = models.IntegerField()
+
     impressora_item1 = models.IntegerField()
     impressora_item2 = models.IntegerField()
     impressora_item3 = models.IntegerField()
     impressora_item4 = models.IntegerField()
     impressora_item5 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
     impressora_item5_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
+    impressora_item6 = models.IntegerField()
+
+    CHOICES_SISTEMA = [
+        ('pro', 'Protocolo'),
+        ('gma', 'GMA'),
+        ('tri', 'Tributário'),
+        ('out', 'Outro'),
+        ('n/a', 'Não se aplica')        
+    ]
+    sistema_gestao_item1 = models.CharField(max_length=3, choices=CHOICES_SISTEMA, default='n/a')
     sistema_gestao_item2 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
     sistema_gestao_item2_porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
     sistema_gestao_item3 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])
     sistema_gestao_item3porque = models.CharField(max_length=255, blank=True, null=True, help_text="Se 'Não', explique o motivo")
     sistema_gestao_item4 = models.IntegerField()
     sistema_gestao_item5 = models.IntegerField()
+
     processo_item1 = models.IntegerField()
     processo_item2 = models.IntegerField()
     processo_item3 = models.IntegerField()
+
     tramitacao_item1 = models.IntegerField()
     tramitacao_item2 = models.IntegerField()
     tramitacao_item3 = models.IntegerField()
     tramitacao_item4 = models.IntegerField()
+
     suporte_item1 = models.IntegerField()
     suporte_item2 = models.IntegerField()
     suporte_item3 = models.IntegerField()
+    suporte_item4 = models.IntegerField()
+    
     resposta = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')], blank=True, null=True)    
     contato_nome = models.CharField(max_length=255, blank=True, null=True)
     contato_telefone = models.CharField(max_length=20, blank=True, null=True)
