@@ -109,7 +109,7 @@ class PesquisaSatisfacao(models.Model):
     suporte_item1 = models.IntegerField()
     suporte_item2 = models.IntegerField()
     suporte_item3 = models.IntegerField()
-    suporte_item4 = models.IntegerField()
+    suporte_item42 = models.IntegerField()
 
     resposta = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')], blank=True, null=True)    
     contato_nome = models.CharField(max_length=255, blank=True, null=True)
