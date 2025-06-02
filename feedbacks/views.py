@@ -6,7 +6,7 @@ from servicos.models import Local_de_atendimento
 from .functions import get_feedback_distribution, get_frequencies, get_valores_termometro
 
 def excecoes(request, hash):
-    if hash == 'cc10d409909d729cd065b242bbe22b20':
+    if hash == 'cc10d409909d729cd065b242bbe22b20' or '3cca8f55a6ef272be6009a887bd83ae6':
         return pesquisa_satisfacao(request, hash)
     return None
 
@@ -73,7 +73,7 @@ def pesquisa_satisfacao(request, hash):
 
 def painel_excecoes(request, hash):
     
-    if hash == 'cc10d409909d729cd065b242bbe22b20':
+    if hash == 'cc10d409909d729cd065b242bbe22b20' or '3cca8f55a6ef272be6009a887bd83ae6':
         return painel_pesquisa_satisfacao(request, hash)
     elif hash == 'b0e38ec238850c01bb2beb853483ea08':
         return painel_feedback_ti(request, hash)
