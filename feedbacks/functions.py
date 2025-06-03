@@ -33,12 +33,12 @@ def get_frequencies(feedbacks, field):
     ]
 
     moda = statistics.mode(values) if values else None
-    mediana = statistics.median(values) if values else None
+    media = round(statistics.mean(values), 2) if values else None
 
     return {
         'frequencias': freq,
         'moda': RATING_CHOICES.get(moda, moda),
-        'mediana': RATING_CHOICES.get(mediana, mediana),
+        'media': RATING_CHOICES.get(media, media),
         'total': total
     }
 

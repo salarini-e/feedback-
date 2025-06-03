@@ -415,11 +415,10 @@
             <div class="distribution-card">
                <h5 style="text-align: center; color: #444;">{{ item.metric }}</h5>
                <div class="distribution-content">
-                  <div class="d-flex flex-column">
+                  <div class="">
                      <div class="statistics-info">
                         <span><strong>Moda:</strong> {{ item.moda|default:"-" }}</span> <span
-                           style="margin-left: 10px;"><strong class="ms-4">Mediana:</strong> {{ item.mediana|default:"-"
-                           }}</span>
+                           style="margin-left: 10px;"><strong class="ms-4">Média:</strong> {{ item.mediana|default:"-"}}</span>
                      </div>
                      <table class="distribution-table">
                         <thead>

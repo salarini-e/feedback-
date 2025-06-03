@@ -4,10 +4,12 @@ from django.db.models import Avg, Count
 from .forms import FeedbackForm, PesquisaSatisfacaoForm
 from servicos.models import Local_de_atendimento
 from .functions import get_feedback_distribution, get_frequencies, get_valores_termometro
-
+from .models import Feedback
 def excecoes(request, hash):
-    if hash == 'cc10d409909d729cd065b242bbe22b20' or '3cca8f55a6ef272be6009a887bd83ae6':
+    if hash == 'cc10d409909d729cd065b242bbe22b20' or hash == '3cca8f55a6ef272be6009a887bd83ae6':
         return pesquisa_satisfacao(request, hash)
+    # elif hash == 'eaf6b20893af78a08f6f426a99f045b1':
+    #     return painel_feedback_ti(request, hash)
     return None
 
 def feedback(request, hash):
@@ -46,8 +48,8 @@ def feedback(request, hash):
     context = {
         'local': local,
         'form': form
-    }
-    return render(request, 'feedback pesquisa_satisfacao.html', context)
+    }    
+    return render(request, 'feedback.html', context)
 
 #PESQUISA DE SATISFAÇÃO
 def pesquisa_satisfacao(request, hash):
@@ -73,16 +75,23 @@ def pesquisa_satisfacao(request, hash):
 
 def painel_excecoes(request, hash):
     
-    if hash == 'cc10d409909d729cd065b242bbe22b20' or '3cca8f55a6ef272be6009a887bd83ae6':
+    if hash == 'cc10d409909d729cd065b242bbe22b20' or hash == '3cca8f55a6ef272be6009a887bd83ae6':
         return painel_pesquisa_satisfacao(request, hash)
-    elif hash == 'b0e38ec238850c01bb2beb853483ea08':
+    elif hash == 'b0e38ec238850c01bb2beb853483ea08' or hash == 'eaf6b20893af78a08f6f426a99f045b1':
         return painel_feedback_ti(request, hash)
-    return ''
+    return False
 
 
 def painel_feedback(request, hash):
+    # Verifica se o hash corresponde a uma exceção
+    resposta = painel_excecoes(request, hash)
+    if resposta:
+        return resposta
+    
+    print('passou aqui')
     local = get_object_or_404(Local_de_atendimento, hash=hash)
-    feedbacks = local.feedbacks.all()    
+    # feedbacks = local.feedbacks.all()    
+    feedbacks = Feedback.objects.filter(local=local).order_by('-dt_inclusao')
     negative_feedbacks = feedbacks.filter(satisfacao__lt=3)
     feedbacks_with_suggestions = feedbacks.exclude(sugestoes__isnull=True).exclude(sugestoes__exact="").exclude(sugestoes__iexact="n/h")  # Exclui 'n/h'
 
@@ -111,7 +120,7 @@ def painel_feedback(request, hash):
             'is_distribution': key.endswith('_dist'),
             'data': value,
             'moda': contexto_estatisticas[key.replace('_dist', '')]['moda'],
-            'mediana': contexto_estatisticas[key.replace('_dist', '')]['mediana']
+            'media': contexto_estatisticas[key.replace('_dist', '')]['media']
         }
         for key, value in summary.items() if key.endswith('_dist')
     ]
@@ -133,14 +142,17 @@ def painel_feedback(request, hash):
         'valores_satisfacao_geral': valores_satisfacao_geral
     }
 
-    if local.nome == 'SUBSECRETARIA DE TI':
-        return render(request, 'painel_fedback_ti.html', context)
+    # if local.nome == 'SUBSECRETARIA DE TI':
+    #     return render(request, 'painel_fedback_ti.html', context)
     return render(request, 'painel_fedback.html', context)
 
 
 def painel_feedback_ti(request, hash):
+    print('passou aqui no painel_feedback_ti')
+    # Verifica se o hash corresponde a uma exceção
     local = get_object_or_404(Local_de_atendimento, hash=hash)
-    feedbacks = local.feedbacks.all()    
+    feedbacks = Feedback.objects.filter(local=local).order_by('-dt_inclusao')
+    print('total de feedbacks:', feedbacks.count())
     negative_feedbacks = feedbacks.filter(satisfacao__lt=3)
     feedbacks_with_suggestions = feedbacks.exclude(sugestoes__isnull=True).exclude(sugestoes__exact="").exclude(sugestoes__iexact="n/h")  # Exclui 'n/h'
 
@@ -169,7 +181,7 @@ def painel_feedback_ti(request, hash):
             'is_distribution': key.endswith('_dist'),
             'data': value,
             'moda': contexto_estatisticas[key.replace('_dist', '')]['moda'],
-            'mediana': contexto_estatisticas[key.replace('_dist', '')]['mediana']
+            'media': contexto_estatisticas[key.replace('_dist', '')]['media']
         }
         for key, value in summary.items() if key.endswith('_dist')
     ]

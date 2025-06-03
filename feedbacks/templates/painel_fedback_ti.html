@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +11,10 @@
       integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
    <style>
+      .my-0{
+         margin-top: 0px;
+         margin-bottom: 0px;
+      }
       .fa-solid {
          font-size: 14pt;
       }
@@ -59,6 +62,8 @@
          margin: 10px;
          text-align: center;
          transition: transform 0.2s ease-in-out;
+         text-decoration: none;
+         color: inherit;
       }
 
       .summary-card:hover {
@@ -169,80 +174,279 @@
          margin: 0; /* Removes default margin */
       }
 
-      .construction-overlay {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background-color: rgba(0, 0, 0, 0.8);
+      .statistics-section {
+         margin-top: 30px;
+      }
+
+      .statistics-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+         gap: 20px;
+      }
+
+      .stat-card {
+         display: flex;
+         align-items: center;
+         background: #fff;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         padding: 15px;
+         transition: transform 0.2s ease-in-out;
+      }
+
+      .stat-card:hover {
+         transform: translateY(-5px);
+      }
+
+      .stat-icon {
+         width: 60px;
+         height: 60px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 50%;
+         color: #fff;
+         font-size: 1.5rem;
+         margin-right: 15px;
+      }
+
+      .stat-info h5 {
+         font-size: 1.2rem;
+         color: #333;
+         margin: 0;
+      }
+
+      .stat-info p {
+         font-size: 1.5rem;
+         font-weight: bold;
+         color: #0056b3;
+         margin: 5px 0 0;
+      }
+
+      .distribution-section {
+         margin-top: 30px;
+      }
+
+      .distribution-grid {
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+      }
+
+      .distribution-card {
+         background: #fff;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         padding: 15px;
+      }
+
+      .distribution-content {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 20px;
+         align-items: flex-start;
+      }
+
+      .distribution-table {
+         width: 60%;
+         border-collapse: collapse;
+      }
+
+      .distribution-table th,
+      .distribution-table td {
+         padding: 10px;
+         text-align: center;
+         border: 1px solid #ddd;
+      }
+
+      .distribution-table th {
+         background-color: #0056b3;
+         color: #fff;
+      }
+
+      .distribution-table tbody tr:hover {
+         background-color: #f1f1f1;
+      }
+
+      .distribution-chart {
+         flex: 1;
          display: flex;
          justify-content: center;
          align-items: center;
-         z-index: 10000;
       }
 
-      .construction-message {
-         text-align: center;
-         color: #000000;
-         background-color: white;
-         padding: 20px;
+      .distribution-chart canvas {
+         max-width: 100%;
+         height: auto;
+      }
+
+      .chart {
+         flex: 1;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100%; /* Ocupa toda a altura disponível */
+      }
+
+      .chart canvas {
+         width: 100% !important; /* Ocupa toda a largura disponível */
+         height: auto !important; /* Ajusta a altura proporcionalmente */
+      }
+
+      .statistics-info {
+         flex: 1;
+         background: #f9f9f900;
          border-radius: 10px;
+         padding: 15px;
+         /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
       }
 
-      .construction-message h1 {
-         font-size: 3rem;
-         margin-bottom: 1rem;
+      .statistics-info p {
+         margin: 5px 0;
+         font-size: 1rem;
+         color: #333;
       }
 
-      .construction-message p {
-         font-size: 1.5rem;
+      .hidden {
+         display: none;
+      }
+      #termometro .chart-container {
+      position: relative;
+      /* width: 100%; */
+      /* max-width: 700px; */
+      height: 300px;
+      margin: auto;
+    }
+    #termometro .gradient-line {
+      position: absolute;
+      top: 50%;
+      height: 8px;
+      border-radius: 4px;
+      transform: translateY(-50%);
+    }
+    #termometro .point {
+      position: absolute;
+      top: calc(50% + 30px);
+      /* font-size: 24px; */
+      transform: translateX(-50%);
+      transition: all 0.3s ease;
+    }
+    #termometro .label {
+      position: absolute;
+      top: calc(50% + 60px);
+      font-size: 14px;
+      transform: translateX(-50%);
+      color: #333;
+    }
+    #termometro .trend-bubble {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: translateX(-50%);
+    }
+    #termometro .trend-point {
+      font-size: 24px;
+      /* border: 2px solid black; */
+      border-radius: 50%;
+      /* padding: 2px;   */
+      background: white;
+      z-index: 10;
+    }
+    #termometro .bubble-tail {
+      width: 2px;
+      height: 15px;
+      background: black;
+      margin-top: 2px;
+    }
+    .mx-auto{
+      margin: 0 auto;      
+    }
+      .d-flex{
+         display: flex;
       }
    </style>
 </head>
 
 <body>
-   <div class="construction-overlay">
-      <div class="construction-message">
-         <h1>Em Construção</h1>
-         <p>Estamos trabalhando para melhorar esta página. Por favor, volte mais tarde.</p>
-         <a href="javascript:history.back()" class="btn btn-secondary mt-3">
-            <i class="fa-solid fa-arrow-left mr-2"></i> Voltar
-         </a>
-      </div>
-   </div>
+   {% load custom_filters %}
    <div class="container">
       <a href="javascript:history.back()" class="btn btn-secondary mb-3">
          <i class="fa-solid fa-arrow-left mr-2"></i> Voltar
       </a>
       <h1>Painel de Feedback</h1>
       <div class="summary-section">
-         <div class="summary-card">
-            <h5>Média de Satisfação</h5>
-            <p>{{ summary.avg_satisfaction|default:"-" }}</p>
-         </div>
-         <div class="summary-card">
-            <h5>Média do Ambiente</h5>
-            <p>{{ summary.avg_ambiente|default:"-" }}</p>
-         </div>
-         <div class="summary-card">
-            <h5>Média do Tempo de Espera</h5>
-            <p>{{ summary.avg_tempo_espera|default:"-" }}</p>
-         </div>
-         <div class="summary-card">
-            <h5>Média do Atendimento</h5>
-            <p>{{ summary.avg_atendimento|default:"-" }}</p>
+         <button onclick="showSection('distribution-section')" class="summary-card">
+            <h5>Distribuição</h5>
+            <p><i class="fa-solid fa-chart-pie" style="color: #0056b3;"></i></p>
+         </button>
+         <button onclick="showSection('feedback-section')" class="summary-card">
+            <h5>Detalhes</h5>
+            <p><i class="fa-solid fa-list" style="color: #28a745;"></i></p>
+         </button>
+         <button onclick="showSection('suggestions-section')" class="summary-card">
+            <h5>Sugestões</h5>
+            <p><i class="fa-solid fa-envelope" style="color: #ffc107;"></i></p>
+         </button>
+         <button onclick="showSection('search-section')" class="summary-card">
+            <h5>Termômetro</h5>            
+            <p><i class="fa-solid fa-temperature-half" style="color: #dc3545;"></i></p>
+         </button>
+      </div>
+      <div id="distribution-section" class="distribution-section hidden">
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Distribuição de Feedbacks</h3>
+         <div class="distribution-grid">
+            {% for item in summary %}
+            {% if item.is_distribution %}
+            <div class="distribution-card">
+               <h5 style="text-align: center; color: #444;">{{ item.metric }}</h5>
+               <div class="distribution-content">
+                  <div class="">                     
+                     <div class="statistics-info">
+                        <span><strong>Moda:</strong> {{ item.moda|default:"-" }}</span> <span style="margin-left: 10px;"><strong class="ms-4">Média:</strong> {{ item.media|default:"-" }}</span>
+                     </div>
+                     <table class="distribution-table">
+                        <thead>
+                           <tr>
+                              <th>Nota</th>
+                              <th>Quantidade</th>
+                              <th>Porcentagem</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for value, data in item.data.items %}
+                           <tr style="background-color: {% if value == 1 %}#ffcccc{% elif value == 2 %}#ffe6cc{% elif value == 3 %}#ffffcc{% elif value == 4 %}#e6ffcc{% elif value == 5 %}#ccffcc{% else %}#ffffff{% endif %};">
+                              <td>
+                                 <i class="fa-solid {% if value == 1 %}fa-face-angry{% elif value == 2 %}fa-face-frown{% elif value == 3 %}fa-face-meh{% elif value == 4 %}fa-face-smile-beam{% elif value == 5 %}fa-face-grin-wink{% else %}fa-question-circle{% endif %}" 
+                                    style="color: {% if value == 1 %}red{% elif value == 2 %}orange{% elif value == 3 %}rgb(235, 219, 0){% elif value == 4 %}rgb(61, 212, 61){% elif value == 5 %}green{% else %}black{% endif %};">
+                                 </i>
+                              </td>
+                              <td>{{ data.count }}</td>
+                              <td>{{ data.percent }}%</td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>                           
+                  </div>    
+                  <div class="chart w-100">
+                     <canvas width="" id="chart-bar-{{item.metric|lower}}" ></canvas>
+                  </div>                         
+               </div>
+            </div>
+            {% endif %}
+            {% endfor %}
          </div>
       </div>
-      <div class="feedback-section">
-         <h3>Detalhes dos Feedbacks</h3>
+      <div id="feedback-section" class="feedback-section hidden">
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Detalhes dos Feedbacks <br>(Total: {{feedbacks.count}})</h3>         
+         <p style="text-align: center; color: #666;">Clique no ícone de envelope para ver as sugestões.</p>
          <table class="feedback-table">
             <thead>
                <tr>
                   <th>Data</th>
-                  <th>Ambiente</th>
-                  <th>Tempo de Espera</th>
-                  <th>Satisfação</th>
+                  <th>Avaliação Atendimento</th>
+                  <th>Rapidez Atendimento</th>
+                  <th>Satisfação com Solução</th>
                   <th>Atendimento</th>
                   <th>Sugestões</th>
                   <th>Contato</th>
@@ -302,8 +506,229 @@
             </tbody>
          </table>
       </div>
+      <div id="suggestions-section" class="hidden">
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Sugestões</h3>
+         <div class="suggestions-list">
+            {% if feedbacks_with_suggestions %}
+            <ul style="list-style: none; padding: 0;">
+               {% for feedback in feedbacks_with_suggestions %}
+               {% if feedback.sugestoes and feedback.sugestoes.strip != "" %}
+               <li style="margin-bottom: 15px; padding: 15px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                     <p><strong>Data:</strong> {{ feedback.dt_inclusao|date:"d/m/Y H:i" }}</p>
+                     <div style="display: flex; gap: 15px; align-items: center;">
+                        <span title="Ambiente" style="display: flex; align-items: center; gap: 5px;">
+                           <i class="fa-solid {{ feedback.get_ambiente_icon.icon }}" style="color: {{ feedback.get_ambiente_icon.color }};"></i>
+                           <span style="font-size: 0.9rem; color: #666;">Avaliação Atendimento</span>
+                        </span>
+                        <span title="Tempo de Espera" style="display: flex; align-items: center; gap: 5px;">
+                           <i class="fa-solid {{ feedback.get_tempo_espera_icon.icon }}" style="color: {{ feedback.get_tempo_espera_icon.color }};"></i>
+                           <span style="font-size: 0.9rem; color: #666;">Rapidez Atendimento</span>
+                        </span>
+                        <span title="Satisfação" style="display: flex; align-items: center; gap: 5px;">
+                           <i class="fa-solid {{ feedback.get_satisfacao_icon.icon }}" style="color: {{ feedback.get_satisfacao_icon.color }};"></i>
+                           <span style="font-size: 0.9rem; color: #666;">Satisfação com Solução</span>
+                        </span>
+                        <span title="Atendimento" style="display: flex; align-items: center; gap: 5px;">
+                           <i class="fa-solid {{ feedback.get_atendimento_icon.icon }}" style="color: {{ feedback.get_atendimento_icon.color }};"></i>
+                           <span style="font-size: 0.9rem; color: #666;">Atendimento</span>
+                        </span>
+                     </div>
+                  </div>
+                  <p><strong>Sugestão:</strong> {{ feedback.sugestoes }}</p>
+                  {% if feedback.incluir_contato %}
+                  <p><strong>Contato:</strong> {{ feedback.contato_nome }} - {{ feedback.contato_telefoe }}</p>
+                  {% endif %}
+               </li>
+               {% endif %}
+               {% endfor %}
+            </ul>
+            {% else %}
+            <p style="text-align: center; color: #666;">Nenhuma sugestão encontrada.</p>
+            {% endif %}
+         </div>
+      </div>
+      <div id="search-section" class="hidden">
+         <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Termômetro de Satisfação</h3>
+         <div id="termometro" class="d-flex bg-info " style="padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">            
+            <div class="mx-auto chart-container" id="chart"></div>
+         </div>
+      </div>
    </div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         {% for item in summary %}
+         {% if item.is_distribution %}
+         {
+            // Generate a unique ID for the metric
+            let metricId = "{{ item.metric|slugify }}";
 
+            // Prepare data for the charts
+            let labels = [
+               "😡", // Nota 1
+               "😟", // Nota 2
+               "😐", // Nota 3
+               "😊", // Nota 4
+               "😁"  // Nota 5
+            ];
+            let dataCounts = [
+               {% for value, data in item.data.items %}
+               {{ data.count }},
+               {% endfor %}
+            ];
+            let backgroundColors = ["#ffcccc", "#ffe6cc", "#ffffcc", "#e6ffcc", "#ccffcc"];
+            let borderColors = ["#ff9999", "#ffcc99", "#ffff99", "#ccff99", "#99ff99"];
+
+            // Bar Chart
+            let barCanvas = document.getElementById("chart-bar-" + metricId);
+            if (barCanvas) {
+               let ctxBar = barCanvas.getContext("2d");
+               new Chart(ctxBar, {
+                  type: "bar",
+                  data: {
+                     labels: labels,
+                     datasets: [{
+                        label: "Distribuição de {{ item.metric }}",
+                        data: dataCounts,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                     }]
+                  },
+                  options: {
+                     responsive: true,
+                     plugins: {
+                        legend: {
+                           display: false
+                        },
+                        tooltip: {
+                           callbacks: {
+                              label: function (context) {
+                                 return `Quantidade: ${context.raw}`;
+                              }
+                           }
+                        }
+                     },
+                     scales: {
+                        x: {
+                           title: {
+                              display: true,
+                              text: "Notas"
+                           }
+                        },
+                        y: {
+                           title: {
+                              display: true,
+                              text: "Quantidade"
+                           },
+                           beginAtZero: true
+                        }
+                     }
+                  }
+               });
+            }
+         }
+         {% endif %}
+         {% endfor %}
+      });
+
+      function showSection(sectionId) {
+         // Hide all sections
+         document.querySelectorAll('#distribution-section, #feedback-section, #suggestions-section, #search-section').forEach(section => {
+            section.classList.add('hidden');
+         });
+
+         // Show the selected section
+         const selectedSection = document.getElementById(sectionId);
+         if (selectedSection) {
+            selectedSection.classList.remove('hidden');
+         }
+      }
+   </script>
+   <script>
+      const data = {
+        a: {{valores_satisfacao_geral.1}},
+        b: {{valores_satisfacao_geral.2}},
+        c: {{valores_satisfacao_geral.3}},
+        d: {{valores_satisfacao_geral.4}},
+        e: {{valores_satisfacao_geral.5}}
+      };
+  
+      const satisfactionMap = [
+        { ponto: 'a' ,max: 5, icon: '<i class="fa-solid fa-face-angry"></i>', emoji: '😡', color: '#e74c3c' },
+        { ponto: 'b' ,max: 10, icon: '<i class="fa-solid fa-face-frown"></i>', emoji: '😟', color: '#e67e22' },
+        { ponto: 'c' ,max: 20, icon: '<i class="fa-solid fa-face-meh"></i>', emoji: '😐', color: '#f1c40f' },
+        { ponto: 'd' ,max: 30, icon: '<i class="fa-solid fa-face-smile"></i>', emoji: '😊', color: '#2ecc71' },
+        { ponto: 'e' ,max: Infinity, icon: '<i class="fa-solid fa-face-laugh"></i>', emoji: '😁', color: '#27ae60' },
+      ];
+  
+      const container = document.getElementById('chart');
+  
+      const keys = Object.keys(data).sort();
+      const values = keys.map(k => data[k]);
+      const totalWeight = values.reduce((a, b) => a + b, 0);
+  
+      const pointSpacing = 120;
+      const offsetLeft = (container.offsetWidth - ((keys.length - 1) * pointSpacing)) / 2 + 20; // Add padding of 20px
+      const positions = keys.map((_, i) => offsetLeft + i * pointSpacing);
+  
+      // Linha de gradiente entre o primeiro e o último ponto
+      const gradientLine = document.createElement('div');
+      gradientLine.className = 'gradient-line';
+      const startX = positions[0] - 20; // Adjust start position for padding
+      const endX = positions[positions.length - 1] + 20; // Adjust end position for padding
+      gradientLine.style.left = `${startX}px`;
+      gradientLine.style.width = `${endX - startX}px`;
+      gradientLine.style.background = 'linear-gradient(to right, #e74c3c 0%, #e67e22 20%, #f1c40f 40%, #2ecc71 70%, #27ae60 100%)';
+      container.appendChild(gradientLine);
+  
+      keys.forEach((key, index) => {
+        const value = data[key];
+        const x = positions[index];
+        const satisfaction = satisfactionMap.find(s => s.ponto === key);
+
+        const point = document.createElement('div');
+        point.className = 'point';
+        point.style.left = `${x}px`;
+        point.style.color = satisfaction.color;
+        point.innerHTML = satisfaction.icon; // Display the respective icon
+        container.appendChild(point);
+
+      //   const label = document.createElement('div');
+      //   label.className = 'label';
+      //   label.style.left = `${x}px`;
+      //   label.innerText = `${key.toUpperCase()} (${value})`;
+      //   container.appendChild(label);
+      });
+  
+      // Cálculo do centro de massa (ponto de equilíbrio)
+      const centerOfMassIndex = values
+        .map((val, i) => i * val)
+        .reduce((a, b) => a + b, 0) / totalWeight;
+
+      const balanceX = offsetLeft + centerOfMassIndex * pointSpacing;
+
+      // Determine the satisfaction level at the center of mass
+      const balanceSatisfaction = satisfactionMap.find((s, i) => centerOfMassIndex <= i) || satisfactionMap[satisfactionMap.length - 1];
+
+      const trendBubble = document.createElement('div');
+      trendBubble.className = 'trend-bubble';
+      trendBubble.style.left = `${balanceX}px`;
+      trendBubble.style.top = `calc(50% - 65px)`;
+
+      const trendPoint = document.createElement('div');
+      trendPoint.className = 'trend-point';
+      trendPoint.style.color = balanceSatisfaction.color;
+      trendPoint.innerHTML = balanceSatisfaction.emoji; // Display the correct emoji based on the center of mass
+
+      const tail = document.createElement('div');
+      tail.className = 'bubble-tail';
+
+      trendBubble.appendChild(trendPoint);
+      trendBubble.appendChild(tail);
+      container.appendChild(trendBubble);
+    </script>
+</body>
 </html>
