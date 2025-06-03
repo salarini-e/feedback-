@@ -9,5 +9,5 @@ urlpatterns = [
     path('feedback/', include('feedbacks.urls')),
     path('servicos/', include('servicos.urls')),
     path('pesquisas/', include('pesquisas.urls')),
-    path('botwhatsapp/', include('botwhatsapp.urls')),
+    path('feedback/whatsapp/', include('botwhatsapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
