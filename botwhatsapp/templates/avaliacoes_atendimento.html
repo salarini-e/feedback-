@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações do Atendimento - WhatsApp Bot</title>
+    <link rel="stylesheet" href="{% static 'css/style_botwhatsapp.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Avaliações do Atendimento (WhatsApp Bot)</h1>
+        <a href="{% url 'botwhatsapp:avaliacoes_atendimento_whatsapp_exportar' %}" class="btn-excel">Baixar Excel</a>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Telefone</th>
+                        <th>Avaliação</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for avaliacao in avaliacoes %}
+                    <tr>
+                        <td>{{ avaliacao.id }}</td>
+                        <td>{{ avaliacao.telefone }}</td>
+                        <td>
+                            {% if avaliacao.avaliacao == 1 %}
+                                <span style="color:green;font-weight:bold"><i class="fa-solid fa-face-smile"></i> Satisfeito</span>
+                            {% elif avaliacao.avaliacao == 2 %}
+                                <span style="color:orange;font-weight:bold"><i class="fa-solid fa-face-meh"></i> Regular</span>
+                            {% else %}
+                                <span style="color:red;font-weight:bold"><i class="fa-solid fa-face-frown"></i> Insatisfeito</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ avaliacao.data|date:'d/m/Y H:i' }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">Nenhuma avaliação encontrada.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
