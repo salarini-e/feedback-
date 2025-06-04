@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'feedbacks',
     'servicos',
     'pesquisas',
+    'botwhatsapp',
 
 ]
 
