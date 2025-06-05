@@ -58,6 +58,7 @@ class PesquisaSatisfacao(models.Model):
     local = models.ForeignKey(Local_de_atendimento, on_delete=models.CASCADE, related_name='pesquisas', null=True, blank=True)
     dt_inclusao = models.DateTimeField(auto_now_add=True)
     
+    secretaria = models.CharField(max_length=250, blank=True, verbose_name="Secretaria")
     internet_item1 = models.IntegerField()
     internet_item2 = models.IntegerField()
     internet_item3 = models.CharField(max_length=3, choices=[('sim', 'Sim'), ('nao', 'Não')])

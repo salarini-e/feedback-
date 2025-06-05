@@ -59,6 +59,16 @@
          <div id="steps-container">
             <!-- Step 1: Internet -->
             <div class="step">
+               <div class="row">
+                  <div class="col" style="text-align: center;">
+                     <h1>Identificação</h1>
+                     <div class="form-group d-flex flex-column" data-category="internet-item2">
+                        <label for="exampleFormControlSelect1">Primeiramente, informe o nome da sua secretaria:</label>
+                        <input type="text" class="form-control mx-auto" id="exampleFormControlSelect1" name="secretaria" placeholder="Digite o nome da secretaria" style="width: 100%; max-width: 600px;">
+                     </div>
+                  </div>
+               </div>
+               <hr class="mt-3">
                <h1>Internet</h1>
                <div class="row">
                   <div class="col" style="text-align: center;">
@@ -800,18 +810,18 @@
                   <div class="col d-flex flex-column" style="text-align: center;">
                      <div class="form-group d-flex flex-column mx-auto" style="max-width: 350px;">
                         <label for="nome" class="mr-auto">Nome</label>
-                        <input type="text" class="form-control" id="nome">
+                        <input type="text" class="form-control" id="nome" name="nome">
                      </div>
                      <div class="form-group d-flex flex-column mx-auto" style="max-width: 350px;">
                         <label for="telefone" class="mr-auto">Telefone</label>
-                        <input type="text" class="form-control" id="telefone">
+                        <input type="text" class="form-control" id="telefone" name="telefone">
                      </div>
                   </div>
                </div>
                <!-- Add the "Enviar" button -->
                <div class="row mt-4">
                   <div class="col text-center">
-                     <button id="" class="btn btn-primary seemore_bt">Enviar</button>
+                     <button class="btn btn-primary seemore_bt py-1 text-center">Enviar</button>
                   </div>
                </div>
             </div>
@@ -906,18 +916,23 @@
             });
          });
 
-         nomeInput.addEventListener("input", function () {
-            respostas["nome"] = this.value.trim();
-         });
+         // nomeInput.addEventListener("input", function () {
+         //    respostas["nome"] = this.value.trim();
+         // });
 
-         telefoneInput.addEventListener("input", function () {
-            respostas["telefone"] = this.value.trim();
-         });
+         // telefoneInput.addEventListener("input", function () {
+         //    respostas["telefone"] = this.value.trim();
+         // });
 
          if (enviarBtn) {
             enviarBtn.addEventListener("click", function () {
                // Remover o atributo 'disabled' de todos os campos antes de enviar
               
+               nome = document.querySelector('input[name="nome"]');
+               telefone = document.querySelector('input[name="telefone"]');
+
+               respostas["contato_nome"] = nome.value;
+               respostas["contato_telefone"] = telefone.value;
 
                console.log("Respostas:", respostas);
 
@@ -955,6 +970,15 @@
                   input.value = sistemaGestaoSelect.value;
                   form.appendChild(input);
                }
+               const nome_secretaria = document.querySelector('input[name="secretaria"]');
+               if (nome_secretaria) {
+                  const input = document.createElement("input");
+                  input.type = "hidden";
+                  input.name = "secretaria";
+                  input.value = nome_secretaria.value;
+                  form.appendChild(input);
+               }
+              
                document.body.appendChild(form);
                form.submit();
             });
@@ -1108,7 +1132,8 @@
 
          .seemore_bt button {
             font-size: 14px;
-            padding: 10px 20px;
+            text-align: center;
+            /* padding: 10px 20px; */
          }
 
          .location_text ul li a {
