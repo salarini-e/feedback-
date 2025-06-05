@@ -11,24 +11,27 @@
 </head>
 <body>
     <div class="container">
-        <h1>Lista de Avaliações do Atendimento (WhatsApp Bot)</h1>
+        <h1>Avaliações de atendimento via WhatsApp</h1>
         <a href="{% url 'botwhatsapp:avaliacoes_atendimento_whatsapp_exportar' %}" class="btn-excel">Baixar Excel</a>
         <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Nome</th>
                         <th>Telefone</th>
                         <th>Avaliação</th>
                         <th>Data</th>
+                        <th>Detalhamento</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for avaliacao in avaliacoes %}
                     <tr>
                         <td>{{ avaliacao.id }}</td>
+                        <td>{{ avaliacao.nome }}</td>
                         <td>{{ avaliacao.telefone }}</td>
-                        <td>
+                        <td style="white-space: nowrap;">
                             {% if avaliacao.avaliacao == 1 %}
                                 <span style="color:green;font-weight:bold"><i class="fa-solid fa-face-smile"></i> Satisfeito</span>
                             {% elif avaliacao.avaliacao == 2 %}
@@ -38,6 +41,7 @@
                             {% endif %}
                         </td>
                         <td>{{ avaliacao.data|date:'d/m/Y H:i' }}</td>
+                        <td>{{ avaliacao.detalhamento }}</td>
                     </tr>
                     {% empty %}
                     <tr><td colspan="4">Nenhuma avaliação encontrada.</td></tr>

@@ -9,7 +9,7 @@ from datetime import datetime
 
 def avaliacoes_atendimento_whatsapp(request):
 
-    avaliacoes = AvaliacaoAtendimento.objects.all()
+    avaliacoes = AvaliacaoAtendimento.objects.all().order_by('-data')
 
     context = {
         'avaliacoes': avaliacoes
@@ -22,7 +22,7 @@ def avaliacoes_atendimento_whatsapp_exportar(request):
     worksheet = workbook.active
     worksheet.title = "Avaliações de Atendimento"
 
-    headers = ['ID', 'Telefone', 'Avaliação', 'Data']
+    headers = ['ID', 'Telefone', 'Nome', 'Avaliação', 'Detalhamento', 'Data']
     worksheet.append(headers)
 
     # Estilização do cabeçalho
@@ -39,20 +39,22 @@ def avaliacoes_atendimento_whatsapp_exportar(request):
         cell.border = thin_border
 
     # Ajuste de largura das colunas
-    column_widths = [8, 18, 15, 20]
+    column_widths = [8, 18, 20, 15, 40, 20]
     for i, width in enumerate(column_widths, 1):
         worksheet.column_dimensions[chr(64 + i)].width = width
 
-    for row_idx, avaliacao in enumerate(AvaliacaoAtendimento.objects.all(), start=2):
+    for row_idx, avaliacao in enumerate(AvaliacaoAtendimento.objects.all().order_by('-data'), start=2):
         data_formatada = make_naive(avaliacao.data).strftime('%d/%m/%Y %H:%M')
         worksheet.append([
             avaliacao.id,
             avaliacao.telefone,
+            getattr(avaliacao, 'nome', ''),
             dict(AvaliacaoAtendimento._meta.get_field('avaliacao').choices).get(avaliacao.avaliacao, avaliacao.avaliacao),
+            getattr(avaliacao, 'detalhamento', ''),
             data_formatada
         ])
         # Adiciona borda nas células da linha
-        for col_num in range(1, 5):
+        for col_num in range(1, 7):
             worksheet.cell(row=row_idx, column=col_num).border = thin_border
 
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
