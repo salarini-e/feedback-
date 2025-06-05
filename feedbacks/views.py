@@ -41,7 +41,7 @@ def feedback(request, hash):
             feedback.save()                        
             return render(request, 'feedback_success.html', {'local': local})
         else:
-            messages.error(request, "Por favor, corrija os erros no formulário.")
+            messages.error(request, "Por favor, certifique-se de que todas as perguntas foram respondidas.")
     else:
         form = FeedbackForm()
 

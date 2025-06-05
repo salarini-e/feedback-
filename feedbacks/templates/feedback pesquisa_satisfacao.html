@@ -64,7 +64,7 @@
                      <h1>Identificação</h1>
                      <div class="form-group d-flex flex-column" data-category="internet-item2">
                         <label for="exampleFormControlSelect1">Primeiramente, informe o nome da sua secretaria:</label>
-                        <input type="text" class="form-control mx-auto" id="exampleFormControlSelect1" name="secretaria" placeholder="Digite o nome da secretaria" style="width: 100%; max-width: 600px;">
+                        <input type="text" class="form-control mx-auto" id="exampleFormControlSelect1" name="secretaria" required placeholder="Digite o nome da secretaria" style="width: 100%; max-width: 600px;">
                      </div>
                   </div>
                </div>
@@ -478,14 +478,14 @@
             </div>
             <!-- Step 4: Sistema de Gestão Municipal -->
             <div class="step">
-               <h1>Sistema de Gestão Municipal</h1>
+               <h1 id="sistema-gestao" >Sistema de Gestão Municipal</h1>
                <!-- Add questions here -->
                <div class="row">
                   <div class="col" style="text-align: center;">
                      <div class="form-group d-flex flex-column" data-category="sistema-gestao">
                         <label for="exampleFormControlSelect1">1. Qual sistema de gestão você utiliza?</label>
-                        <select class="form-control mx-auto" id="exampleFormControlSelect1" name="sistema-gestao">
-                           <option>Escolha uma opção</option>
+                        <select class="form-control mx-auto" name="sistema-gestao">
+                           <option value="">Escolha uma opção</option>
                            <option value="pro">Protocolo</option>
                            <option value="gma">GMA</option>
                            <option value="tri">Tributário</option>
@@ -963,24 +963,34 @@
                   }
                });
                const sistemaGestaoSelect = document.querySelector('select[name="sistema-gestao"]');
-               if (sistemaGestaoSelect) {
+               if (sistemaGestaoSelect && sistemaGestaoSelect.value !== "") {
                   const input = document.createElement("input");
                   input.type = "hidden";
                   input.name = "sistema_gestao_item1";
                   input.value = sistemaGestaoSelect.value;
                   form.appendChild(input);
                }
+               else{
+                  
+                  document.getElementById('sistema-gestao').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  alert('Você deve informar o sistema de gestão para enviar o formulário.');
+                  return;
+               }
                const nome_secretaria = document.querySelector('input[name="secretaria"]');
-               if (nome_secretaria) {
+               if (nome_secretaria.value !== "") {
                   const input = document.createElement("input");
                   input.type = "hidden";
                   input.name = "secretaria";
                   input.value = nome_secretaria.value;
                   form.appendChild(input);
+                  document.body.appendChild(form);
+                  form.submit();
+               }else{
+                  nome_secretaria.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  alert('Você deve informar sua secretaria para enviar o formulário.');
                }
               
-               document.body.appendChild(form);
-               form.submit();
+               
             });
          }
       });
