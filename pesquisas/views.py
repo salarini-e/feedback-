@@ -101,7 +101,7 @@ def questionario_seharf(request):
 
     return render(request, 'pesquisas/questionario_seharf.html')
 
-@login_required
+
 def questionario_seharf_export_to_excel(request):
     # Create a workbook and a worksheet
     workbook = Workbook()
