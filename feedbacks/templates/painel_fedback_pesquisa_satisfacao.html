@@ -383,6 +383,203 @@
       .d-flex {
          display: flex;
       }
+
+      .feedback-cards-list {
+         display: flex;
+         flex-direction: column;
+         gap: 28px;
+      }
+
+      .feedback-card {
+         background: #fff;
+         border-radius: 16px;
+         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
+         padding: 32px 28px 24px 28px;
+         transition: box-shadow 0.2s;
+         border: 1px solid #e6e6e6;
+         font-size: 1.08rem;
+      }
+
+      .feedback-card:hover {
+         box-shadow: 0 10px 32px rgba(0, 0, 0, 0.13);
+         border-color: #b3d0f7;
+      }
+
+      .feedback-card-header {
+         display: flex;
+         flex-direction: column;
+         border-bottom: 1.5px solid #e6e6e6;
+         margin-bottom: 18px;
+         padding-bottom: 12px;
+         background: #fff;
+         border-radius: 12px 12px 0 0;
+         font-size: 1.08rem;
+      }
+
+      .feedback-card-header>strong {
+         font-size: 1.15rem;
+         color: #0056b3;
+         margin-bottom: 2px;
+         letter-spacing: 0.5px;
+      }
+
+      .feedback-card-header>div {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         width: 100%;
+         font-size: 1.05rem;
+      }
+
+      .feedback-card-header span {
+         font-size: 1.05rem;
+      }
+
+      .feedback-card-body {
+         display: flex;
+         flex-direction: column;
+         gap: 0;
+      }
+
+      .feedback-row {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 0 32px;
+         margin-bottom: 18px;
+      }
+
+      .feedback-col {
+         flex: 1 1 0;
+         min-width: 320px;
+         max-width: 50%;
+         box-sizing: border-box;
+         margin-bottom: 0;
+      }
+
+      .feedback-col>div:first-child {
+         font-size: 1.13rem;
+         font-weight: 600;
+         color: #222;
+         margin-bottom: 2px;
+         letter-spacing: 0.2px;
+      }
+
+      .feedback-col>div:last-child {
+         font-size: 1.08rem;
+         color: #222;
+      }
+
+      .feedback-card-body span[title] {
+         background: #f3f7fa;
+         border-radius: 8px;
+         padding: 4px 10px;
+         margin-bottom: 2px;
+         font-size: 1.07rem;
+         display: flex;
+         align-items: center;
+         min-width: 48px;
+      }
+
+      .feedback-card-body span[title] strong {
+         margin-right: 3px;
+         font-size: 1.01em;
+         color: #888;
+      }
+
+      .feedback-card-body em {
+         font-size: 1.01rem;
+         color: #888;
+         font-style: italic;
+      }
+
+      .feedback-card-body .fa-solid {
+         font-size: 1.35rem;
+         margin-right: 2px;
+         vertical-align: middle;
+      }
+
+      .feedback-card-body [title="Nota 0-10"] {
+         background: #eaf8e6;
+         color: #1b6d2b;
+         font-weight: 600;
+         border: 1px solid #d0e9d2;
+      }
+
+      .feedback-card-body [title^="Sim"],
+      .feedback-card-body [title^="Não"] {
+         font-weight: 600;
+      }
+
+      @media (max-width: 900px) {
+         .feedback-card {
+            padding: 18px 6px 14px 6px;
+            font-size: 0.98rem;
+         }
+
+         .feedback-card-header,
+         .feedback-card-header>div,
+         .feedback-card-header span {
+            font-size: 0.97rem;
+         }
+
+         .feedback-col>div:first-child {
+            font-size: 1.01rem;
+         }
+
+         .feedback-col>div:last-child {
+            font-size: 0.97rem;
+         }
+
+         .feedback-card-body span[title] {
+            font-size: 0.97rem;
+            min-width: 36px;
+         }
+
+         .feedback-row {
+            gap: 0 12px;
+         }
+
+         .feedback-col {
+            min-width: 220px;
+         }
+      }
+
+      @media (max-width: 600px) {
+         .feedback-card {
+            padding: 10px 2px 10px 2px;
+            font-size: 0.92rem;
+         }
+
+         .feedback-card-header,
+         .feedback-card-header>div,
+         .feedback-card-header span {
+            font-size: 0.92rem;
+         }
+
+         .feedback-col>div:first-child {
+            font-size: 0.97rem;
+         }
+
+         .feedback-col>div:last-child {
+            font-size: 0.92rem;
+         }
+
+         .feedback-card-body span[title] {
+            font-size: 0.92rem;
+            min-width: 28px;
+            padding: 2px 5px;
+         }
+
+         .feedback-row {
+            flex-direction: column;
+            gap: 0;
+         }
+
+         .feedback-col {
+            max-width: 100%;
+            min-width: 0;
+         }
+      }
    </style>
 </head>
 
@@ -455,65 +652,178 @@
       <div id="pesquisa-section" class="feedback-section ">
          <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Detalhes das Pesquisas
             <br>(Total: {{ pesquisas.count }})</h3>
-         <table class="feedback-table">
-            <thead>
-               <tr>
-                  <th>Data</th>
-                  <th>Internet</th>
-                  <th>Telefonia</th>
-                  <th>Impressora</th>
-                  <th>Sistema Gestão</th>
-                  <th>Processo Digital</th>
-                  <th>Tramitação</th>
-                  <th>Suporte</th>
-                  <th>Sugestões</th>
-                  <th>Contato</th>
-               </tr>
-            </thead>
-            <tbody>
-               {% for pesquisa in pesquisas %}
-               <tr>
-                  <td>{{ pesquisa.dt_inclusao|date:"d/m/Y H:i" }}</td>
-                  <td>
-                     {{ pesquisa.internet_item1 }}, {{ pesquisa.internet_item2 }}, {{ pesquisa.internet_item3 }}, {{ pesquisa.internet_item4 }}
-                  </td>
-                  <td>
-                     {{ pesquisa.telefonia_item1 }}, {{ pesquisa.telefonia_item2 }}, {{ pesquisa.telefonia_item3 }}, {{ pesquisa.suporte_item4 }}, {{ pesquisa.telefonia_item5 }}
-                  </td>
-                  <td>
-                     {{ pesquisa.impressora_item1 }}, {{ pesquisa.impressora_item2 }}, {{ pesquisa.impressora_item3 }}, {{ pesquisa.impressora_item4 }}, {{ pesquisa.impressora_item5 }}
-                  </td>
-                  <td>
-                     {{ pesquisa.sistema_gestao_item2 }}, {{ pesquisa.sistema_gestao_item3 }}, {{ pesquisa.sistema_gestao_item4 }}, {{ pesquisa.sistema_gestao_item5 }}
-                  </td>
-                  <td>
-                     {{ pesquisa.processo_item1 }}, {{ pesquisa.processo_item2 }}, {{ pesquisa.processo_item3 }}
-                  </td>
-                  <td>
-                     {{ pesquisa.tramitacao_item1 }}, {{ pesquisa.tramitacao_item2 }}, {{ pesquisa.tramitacao_item3 }}, {{ pesquisa.tramitacao_item4 }}
-                  </td>
-                  <td>
-                     {{ pesquisa.suporte_item1 }}, {{ pesquisa.suporte_item2 }}, {{ pesquisa.suporte_item3 }}, {{ pesquisa.suporte_item4 }}
-                  </td>
-                  <td>
-                     {% if pesquisa.internet_item3_porque %}Internet: {{ pesquisa.internet_item3_porque }}<br>{% endif %}
-                     {% if pesquisa.telefonia_item2_porque %}Telefonia: {{ pesquisa.telefonia_item2_porque }}<br>{% endif %}
-                     {% if pesquisa.suporte_item4_porque %}Suporte: {{ pesquisa.suporte_item4_porque }}<br>{% endif %}
-                     {% if pesquisa.impressora_item5_porque %}Impressora: {{ pesquisa.impressora_item5_porque }}<br>{% endif %}
-                     {% if pesquisa.sistema_gestao_item2_porque %}Gestão: {{ pesquisa.sistema_gestao_item2_porque }}<br>{% endif %}
-                     {% if pesquisa.sistema_gestao_item3porque %}Gestão: {{ pesquisa.sistema_gestao_item3porque }}<br>{% endif %}
-                  </td>
-                  <td>
-                     {% if pesquisa.resposta == 'sim' %}
-                        {{ pesquisa.contato_nome }}<br>{{ pesquisa.contato_telefone }}
-                     {% else %}
-                        Não informado
-                     {% endif %}
-                  </td>
-               </tr>
-               {% endfor %}
-            </tbody>
-         </table>
+         <div class="feedback-cards-list">
+            {% for pesquisa in pesquisas %}
+            <div class="feedback-card">
+               <!-- Header: Secretaria, Data e Contato -->
+               <div class="feedback-card-header">
+                  <strong>Secretaria: </strong><span style="font-weight: bold; color: #0056b3;">{{ pesquisa.secretaria }}</span>
+                  <div>
+                     <span><strong>Data:</strong> {{ pesquisa.dt_inclusao|date:"d/m/Y H:i" }}</span>
+                     <span>
+                        <strong>Contato:</strong>
+                        {% if pesquisa.resposta == 'sim' and pesquisa.contato_nome %}
+                           {{ pesquisa.contato_nome }} <span style="margin-left: 10px;">{{ pesquisa.contato_telefone }}</span>
+                        {% else %}
+                           Não informado
+                        {% endif %}
+                     </span>
+                  </div>
+               </div>
+               <div class="feedback-card-body">
+                  <div class="feedback-row">
+                     <div class="feedback-col">
+                        <div>Internet:</div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                           <span title="Estabilidade"><strong>1.</strong> {% include "emoticon.html" with value=pesquisa.internet_item1 %}</span>
+                           <span title="Velocidade"><strong>2.</strong> {% include "emoticon.html" with value=pesquisa.internet_item2 %}</span>
+                           <span title="Disponibilidade"><strong>3.</strong>
+                              {% if pesquisa.internet_item3 == 'sim' %}
+                                 <span style="color: #28a745; font-weight: bold;">Sim</span>
+                              {% else %}
+                                 <span style="color: #dc3545; font-weight: bold;">Não</span>
+                              {% endif %}
+                           </span>
+                           <span title="Suporte"><strong>4.</strong> {% include "emoticon.html" with value=pesquisa.internet_item4 %}</span>
+                           {% if pesquisa.internet_item5 %}
+                              <span title="Nota 0-10"><strong>5.</strong> <span style="font-weight:bold;">Nota:</span> {{ pesquisa.internet_item5 }}</span>
+                           {% endif %}
+                        </div>
+                     </div>
+                     <div class="feedback-col">
+                        <div>Telefonia Digital:</div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                           <span title="Qualidade"><strong>1.</strong> {% include "emoticon.html" with value=pesquisa.telefonia_item1 %}</span>
+                           <span title="Cobertura"><strong>2.</strong>
+                              {% if pesquisa.telefonia_item2 == 'sim' %}
+                                 <span style="color: #28a745; font-weight: bold;">Sim</span>
+                              {% else %}
+                                 <span style="color: #dc3545; font-weight: bold;">Não</span>
+                              {% endif %}
+                           </span>
+                           <span title="Rapidez"><strong>3.</strong> {% include "emoticon.html" with value=pesquisa.telefonia_item3 %}</span>
+                           <span title="Funcionalidade"><strong>4.</strong>
+                              {% if pesquisa.suporte_item4 == 'sim' %}
+                                 <span style="color: #28a745; font-weight: bold;">Sim</span>
+                              {% else %}
+                                 <span style="color: #dc3545; font-weight: bold;">Não</span>
+                              {% endif %}
+                           </span>
+                           <span title="Equipe Técnica"><strong>5.</strong> {% include "emoticon.html" with value=pesquisa.telefonia_item5 %}</span>
+                           {% if pesquisa.telefonia_item6 %}
+                              <span title="Nota 0-10"><strong>6.</strong> <span style="font-weight:bold;">Nota:</span> {{ pesquisa.telefonia_item6 }}</span>
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="feedback-row">
+                     <div class="feedback-col">
+                        <div>Impressora:</div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                           <span title="Qualidade"><strong>1.</strong> {% include "emoticon.html" with value=pesquisa.impressora_item1 %}</span>
+                           <span title="Suporte"><strong>2.</strong> {% include "emoticon.html" with value=pesquisa.impressora_item2 %}</span>
+                           <span title="Suprimentos"><strong>3.</strong> {% include "emoticon.html" with value=pesquisa.impressora_item3 %}</span>
+                           <span title="Tempo Resolução"><strong>4.</strong> {% include "emoticon.html" with value=pesquisa.impressora_item4 %}</span>
+                           <span title="Volume"><strong>5.</strong>
+                              {% if pesquisa.impressora_item5 == 'sim' %}
+                                 <span style="color: #28a745; font-weight: bold;">Sim</span>
+                              {% else %}
+                                 <span style="color: #dc3545; font-weight: bold;">Não</span>
+                              {% endif %}
+                           </span>
+                           {% if pesquisa.impressora_item6 %}
+                              <span title="Nota 0-10"><strong>6.</strong> <span style="font-weight:bold;">Nota:</span> {{ pesquisa.impressora_item6 }}</span>
+                           {% endif %}
+                        </div>
+                     </div>
+                     <div class="feedback-col">
+                        <div>Sistema de Gestão Municipal:</div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                           <span title="Sistema"><strong>1.</strong> {{ pesquisa.get_sistema_gestao_item1_display }}</span>
+                           <span title="Funcionalidade"><strong>2.</strong>
+                              {% if pesquisa.sistema_gestao_item2 == 'sim' %}
+                                 <span style="color: #28a745; font-weight: bold;">Sim</span>
+                              {% else %}
+                                 <span style="color: #dc3545; font-weight: bold;">Não</span>
+                              {% endif %}
+                           </span>
+                           <span title="Disponibilidade"><strong>3.</strong>
+                              {% if pesquisa.sistema_gestao_item3 == 'sim' %}
+                                 <span style="color: #28a745; font-weight: bold;">Sim</span>
+                              {% else %}
+                                 <span style="color: #dc3545; font-weight: bold;">Não</span>
+                              {% endif %}
+                           </span>
+                           <span title="Suporte"><strong>4.</strong> {% include "emoticon.html" with value=pesquisa.sistema_gestao_item4 %}</span>
+                           <span title="Rapidez"><strong>5.</strong> {% include "emoticon.html" with value=pesquisa.sistema_gestao_item5 %}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="feedback-row">
+                     <div class="feedback-col">
+                        <div>Processo Digital:</div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                           <span title="Facilidade"><strong>1.</strong> {% include "emoticon.html" with value=pesquisa.processo_item1 %}</span>
+                           <span title="Organização"><strong>2.</strong> {% include "emoticon.html" with value=pesquisa.processo_item2 %}</span>
+                           <span title="Tempo"><strong>3.</strong> {% include "emoticon.html" with value=pesquisa.processo_item3 %}</span>
+                        </div>
+                     </div>
+                     <div class="feedback-col">
+                        <div>Tramitação:</div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                           <span title="Fluidez"><strong>1.</strong> {% include "emoticon.html" with value=pesquisa.tramitacao_item1 %}</span>
+                           <span title="Acompanhamento"><strong>2.</strong> {% include "emoticon.html" with value=pesquisa.tramitacao_item2 %}</span>
+                           <span title="Agilidade"><strong>3.</strong> {% include "emoticon.html" with value=pesquisa.tramitacao_item3 %}</span>
+                           <span title="Transparência"><strong>4.</strong> {% include "emoticon.html" with value=pesquisa.tramitacao_item4 %}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="feedback-row">
+                     <div class="feedback-col">
+                        <div>Suporte e Treinamento:</div>
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                           <span title="Dúvidas"><strong>1.</strong> {% include "emoticon.html" with value=pesquisa.suporte_item1 %}</span>
+                           <span title="Treinamento"><strong>2.</strong> {% include "emoticon.html" with value=pesquisa.suporte_item2 %}</span>
+                           <span title="Equipe TI"><strong>3.</strong> {% include "emoticon.html" with value=pesquisa.suporte_item3 %}</span>
+                           {% if pesquisa.suporte_item42 %}
+                              <span title="Outro"><strong>4.</strong> {% include "emoticon.html" with value=pesquisa.suporte_item42 %}</span>
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Sugestões -->
+                  <div class="feedback-row" style="margin-top: 8px;">
+                     <div class="feedback-col" style="flex: 1 1 100%; max-width: 100%;">
+                        <div style="font-weight: 600; color: #0056b3; margin-bottom: 4px;">Sugestões:</div>
+                        <ul style="margin: 0; padding-left: 18px;">
+                           {% if pesquisa.internet_item3_porque %}
+                              <li><strong>Internet - Item 3:</strong> {{ pesquisa.internet_item3_porque }}</li>
+                           {% endif %}
+                           {% if pesquisa.telefonia_item2_porque %}
+                              <li><strong>Telefonia - Item 2:</strong> {{ pesquisa.telefonia_item2_porque }}</li>
+                           {% endif %}
+                           {% if pesquisa.suporte_item4_porque %}
+                              <li><strong>Telefonia - Item 4:</strong> {{ pesquisa.suporte_item4_porque }}</li>
+                           {% endif %}
+                           {% if pesquisa.impressora_item5_porque %}
+                              <li><strong>Impressora - Item 5:</strong> {{ pesquisa.impressora_item5_porque }}</li>
+                           {% endif %}
+                           {% if pesquisa.sistema_gestao_item2_porque %}
+                              <li><strong>Sistema Gestão - Item 2:</strong> {{ pesquisa.sistema_gestao_item2_porque }}</li>
+                           {% endif %}
+                           {% if pesquisa.sistema_gestao_item3porque %}
+                              <li><strong>Sistema Gestão - Item 3:</strong> {{ pesquisa.sistema_gestao_item3porque }}</li>
+                           {% endif %}
+                           {% if not pesquisa.internet_item3_porque and not pesquisa.telefonia_item2_porque and not pesquisa.suporte_item4_porque and not pesquisa.impressora_item5_porque and not pesquisa.sistema_gestao_item2_porque and not pesquisa.sistema_gestao_item3porque %}
+                              <li style="color: #888;">Nenhuma sugestão registrada.</li>
+                           {% endif %}
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
       </div>
       <div id="sugestoes-section" class="hidden">
          <h3 style="text-align: center; color: #0056b3; margin-bottom: 20px; margin-top: 30px;">Sugestões</h3>
