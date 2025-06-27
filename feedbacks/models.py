@@ -101,6 +101,7 @@ class PesquisaSatisfacao(models.Model):
     processo_item1 = models.IntegerField()
     processo_item2 = models.IntegerField()
     processo_item3 = models.IntegerField()
+    processo_item4 = models.CharField(null=True, max_length=10, blank=True)
 
     tramitacao_item1 = models.IntegerField()
     tramitacao_item2 = models.IntegerField()
