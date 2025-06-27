@@ -585,9 +585,16 @@
 
 <body>
    <div class="container">
-      <a href="javascript:history.back()" class="btn btn-secondary mb-3">
-         <i class="fa-solid fa-arrow-left mr-2"></i> Voltar
-      </a>
+      <div class="row">
+         <div class="col d-flex">
+            <a href="javascript:history.back()" class="btn btn-secondary mb-3">
+               <i class="fa-solid fa-arrow-left me-2"></i> Voltar
+            </a>
+            <a href="{% url 'feedbacks:exportar_pesquisas_excel' local.hash %}" class="btn btn-success mb-3 ms-auto" style="margin-left: auto;">
+               <i class="fa-solid fa-file-excel me-2"></i> Baixar arquivo
+            </a>
+         </div>
+      </div>
       <h1>Painel Pesquisa de Satisfação</h1>
       <div style="background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
          <i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i>

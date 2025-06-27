@@ -5,6 +5,10 @@ from .forms import FeedbackForm, PesquisaSatisfacaoForm
 from servicos.models import Local_de_atendimento
 from .functions import get_feedback_distribution, get_frequencies, get_valores_termometro
 from .models import Feedback
+from django.http import HttpResponse
+import openpyxl
+from openpyxl.utils import get_column_letter
+
 def excecoes(request, hash):
     if hash == 'cc10d409909d729cd065b242bbe22b20' or hash == '3cca8f55a6ef272be6009a887bd83ae6':
         return pesquisa_satisfacao(request, hash)
@@ -261,3 +265,93 @@ def painel_pesquisa_satisfacao(request, hash):
         'summary': summary,
     }
     return render(request, 'painel_fedback_pesquisa_satisfacao.html', context)
+
+def exportar_pesquisas_excel(request, hash):
+    from .models import PesquisaSatisfacao
+    local = get_object_or_404(Local_de_atendimento, hash=hash)
+    pesquisas = PesquisaSatisfacao.objects.filter(local=local).order_by('-dt_inclusao')
+
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Pesquisas"
+
+    # Cabeçalhos
+    headers = [
+        "ID", "Data", "Secretaria",
+        "Internet 1", "Internet 2", "Internet 3", "Internet 3 Porquê", "Internet 4", "Internet 5",
+        "Telefonia 1", "Telefonia 2", "Telefonia 2 Porquê", "Telefonia 3", "Telefonia 4", "Telefonia 4 Porquê", "Telefonia 5", "Telefonia 6",
+        "Impressora 1", "Impressora 2", "Impressora 3", "Impressora 4", "Impressora 5", "Impressora 5 Porquê", "Impressora 6",
+        "Sistema Gestão 1", "Sistema Gestão 2", "Sistema Gestão 2 Porquê", "Sistema Gestão 3", "Sistema Gestão 3 Porquê", "Sistema Gestão 4", "Sistema Gestão 5",
+        "Processo 1", "Processo 2", "Processo 3",
+        "Tramitação 1", "Tramitação 2", "Tramitação 3", "Tramitação 4",
+        "Suporte 1", "Suporte 2", "Suporte 3", "Suporte 4.2",
+        "Resposta", "Contato Nome", "Contato Telefone"
+    ]
+    ws.append(headers)
+
+    for pesquisa in pesquisas:
+        ws.append([
+            pesquisa.id,
+            pesquisa.dt_inclusao.strftime("%d/%m/%Y %H:%M"),
+            pesquisa.secretaria,
+            pesquisa.internet_item1,
+            pesquisa.internet_item2,
+            pesquisa.internet_item3,
+            pesquisa.internet_item3_porque,
+            pesquisa.internet_item4,
+            pesquisa.internet_item5,
+            pesquisa.telefonia_item1,
+            pesquisa.telefonia_item2,
+            pesquisa.telefonia_item2_porque,
+            pesquisa.telefonia_item3,
+            pesquisa.suporte_item4,
+            pesquisa.suporte_item4_porque,
+            pesquisa.telefonia_item5,
+            pesquisa.telefonia_item6,
+            pesquisa.impressora_item1,
+            pesquisa.impressora_item2,
+            pesquisa.impressora_item3,
+            pesquisa.impressora_item4,
+            pesquisa.impressora_item5,
+            pesquisa.impressora_item5_porque,
+            pesquisa.impressora_item6,
+            pesquisa.sistema_gestao_item1,
+            pesquisa.sistema_gestao_item2,
+            pesquisa.sistema_gestao_item2_porque,
+            pesquisa.sistema_gestao_item3,
+            pesquisa.sistema_gestao_item3porque,
+            pesquisa.sistema_gestao_item4,
+            pesquisa.sistema_gestao_item5,
+            pesquisa.processo_item1,
+            pesquisa.processo_item2,
+            pesquisa.processo_item3,
+            pesquisa.tramitacao_item1,
+            pesquisa.tramitacao_item2,
+            pesquisa.tramitacao_item3,
+            pesquisa.tramitacao_item4,
+            pesquisa.suporte_item1,
+            pesquisa.suporte_item2,
+            pesquisa.suporte_item3,
+            pesquisa.suporte_item42,
+            pesquisa.resposta,
+            pesquisa.contato_nome,
+            pesquisa.contato_telefone,
+        ])
+
+    # Ajusta largura das colunas
+    for i, col in enumerate(ws.columns, 1):
+        max_length = 0
+        for cell in col:
+            try:
+                if cell.value:
+                    max_length = max(max_length, len(str(cell.value)))
+            except:
+                pass
+        ws.column_dimensions[get_column_letter(i)].width = max(12, min(max_length + 2, 40))
+
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = f'attachment; filename=pesquisas_{local.hash}.xlsx'
+    wb.save(response)
+    return response
