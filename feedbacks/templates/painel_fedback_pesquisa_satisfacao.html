@@ -799,11 +799,15 @@
                      </div>
                      <div class="feedback-col">
                         <div>Avaliações de 0 a 10:</div>
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; flex-direction: row; gap: 24px; flex-wrap: wrap;">
+                           <div style="display: flex; flex-direction: column; gap: 6px; min-width: 120px;">
                               <span><strong>Internet:</strong> {{ pesquisa.internet_item5 }}</span>
                               <span><strong>Telefonia Digital:</strong> {{ pesquisa.telefonia_item6 }}</span>
+                           </div>
+                           <div style="display: flex; flex-direction: column; gap: 6px; min-width: 120px;">
                               <span><strong>Impressora:</strong> {{ pesquisa.impressora_item6 }}</span>
                               <span><strong>Processo Digital:</strong> {{ pesquisa.processo_item4 }}</span>
+                           </div>
                         </div>
                      </div>
                   </div>

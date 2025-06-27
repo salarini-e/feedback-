@@ -949,7 +949,12 @@
                Object.keys(respostas).forEach(key => {
                   const input = document.createElement("input");
                   input.type = "hidden";
-                  input.name = key.replace(/-/g, '_'); // Replace hyphens with underscores for model compatibility
+                  // Corrige o nome do campo do processo digital para o model
+                  if (key === "processo_digital_item5") {
+                     input.name = "processo_item4";
+                  } else {
+                     input.name = key.replace(/-/g, '_');
+                  }
                   input.value = respostas[key];
                   form.appendChild(input);
                });
